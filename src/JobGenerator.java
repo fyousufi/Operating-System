@@ -12,7 +12,7 @@ public class JobGenerator {
 			while(memRequest < 24 || memRequest > 100) {
 				memRequest = (int)(Math.random()*100+24);
 			}
-			jobqueue.setMemRequest(i, memRequest);
+			jobqueue.setMemoryRequest(i, memRequest);
 
 			//Generate time request
 			int timeRequest = 0;
@@ -23,7 +23,7 @@ public class JobGenerator {
 
 			//Set other variables for this Job to their defaults.
 			jobqueue.setID(i, i);
-			jobqueue.setTimeRemain(i, timeRequest);
+			jobqueue.setTimeRemaining(i, timeRequest);
 		}
 	}
 }

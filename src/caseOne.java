@@ -27,7 +27,7 @@ public class caseOne {
 				}
 
 				//If there are no more Jobs that have not been completed or currently assigned
-				if(!jobs.getAnyUnassignedJobs()) {
+				if(!jobs.getUnassignedJobs()) {
 					assigned = true;
 				}
 
@@ -64,10 +64,10 @@ public class caseOne {
 						//During this tick, there are still Jobs that haven't been checked that may need
 						//to be assigned.
 						Boolean success = false;
-						for(int i = main.firstAvailableMemoryPos(); i < main.size && success == false; i++) {
+						for(int i = main.firstAvailableMemorySlot(); i < main.size && success == false; i++) {
 							if(!main.getInUse(i)) {
 								//This memory module is not in use.
-								if(jobs.getMemRequest(count) < main.getSize(i)) {
+								if(jobs.getMemoryRequest(count) < main.getSize(i)) {
 									//This job can fit in the memory block
 									main.assignMemory(i, jobs.getJob(count));
 									success = true;
@@ -92,8 +92,13 @@ public class caseOne {
 			timeUnit();
 
 			//Break the while loop if all jobs are done.
+<<<<<<< HEAD
 			if(!jobs.getAnyUnfinishedJobs()) {
 				caseTerminated = true;
+=======
+			if(!jobs.getUnfinishedJobs()) {
+				caseComplete = true;
+>>>>>>> origin/master
 			}
 
 			//Break the while loop if one more tick will be the 30th (max) tick, per the instructions.
@@ -109,9 +114,15 @@ public class caseOne {
 	}
 
 	/***Tick***/
+<<<<<<< HEAD
 	public void timeUnit() {
 		timeUnit++;
 		main.tick();
+=======
+	public void tick() {
+		tick++;
+		main.timeSliceFull();
+>>>>>>> origin/master
 		System.out.println("=========================================================================");
 		System.out.println("Tick: " + timeUnit);
 		System.out.println(jobs.toString());
