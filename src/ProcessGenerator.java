@@ -1,9 +1,9 @@
-public class JobGenerator {
+public class ProcessGenerator {
 	/***Variables***/
 	public Queue jobqueue;
 
 	/***Constructor/Execution***/
-	public JobGenerator(Queue jobqueue) {
+	public ProcessGenerator(Queue jobqueue) {
 		this.jobqueue = jobqueue;
 
 		for(int i = 0; i < 20; i++) {

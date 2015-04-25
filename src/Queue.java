@@ -1,22 +1,22 @@
 public class Queue {
 	/***Variables***/
-	public Job[] jobQueue;
+	public Process[] jobQueue;
 	public static final int NUMBER_OF_JOBS = 20;
 	
 	/***Constructor***/
 	public Queue() {
-		jobQueue = new Job[NUMBER_OF_JOBS];
+		jobQueue = new Process[NUMBER_OF_JOBS];
 		
 		for (int i = 0; i < NUMBER_OF_JOBS; i++) {
-			jobQueue[i] = new Job();
+			jobQueue[i] = new Process();
 		}
 	}
 
 	public Queue(Queue queue) {
-		jobQueue = new Job[queue.getLength()];
+		jobQueue = new Process[queue.getLength()];
 		
 		for(int i = 0; i < queue.getLength(); i++) {
-			Job temp = new Job(queue.getJob(i));
+			Process temp = new Process(queue.getJob(i));
 			setJob(i, temp);
 		}
 	}
@@ -46,7 +46,7 @@ public class Queue {
 		return jobQueue[segment].getStatus();
 	}
 
-	public Job getJob(int segment) {
+	public Process getJob(int segment) {
 		return jobQueue[segment];
 	}
 
@@ -79,8 +79,8 @@ public class Queue {
 		jobQueue[segment].setStatus(status);
 	}
 
-	public void setJob(int segment, Job job) {
-		jobQueue[segment] = job;
+	public void setJob(int segment, Process process) {
+		jobQueue[segment] = process;
 	}
 
 	/***Functions***/
@@ -144,7 +144,7 @@ public class Queue {
 		for (int i = 0; i < getLength() - 1; i++) {
 			for (int j = 0; j < getLength() - 1 - i; j++) {
 				if (queueCopy.getTimeRequest(j) > queueCopy.getTimeRequest(j + 1)) {
-					Job temp = queueCopy.getJob(j);
+					Process temp = queueCopy.getJob(j);
 					queueCopy.setJob(j, queueCopy.getJob(j + 1));
 					queueCopy.setJob(j + 1, temp);
 				}

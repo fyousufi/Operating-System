@@ -1,7 +1,7 @@
 public class caseTwo {
 	/***Variables***/
-	Boolean caseComplete = false;
-	int tick = 0;
+	Boolean caseTerminated = false;
+	int countoftimeSliceFull = 0;
 	Queue jobs;
 	MainMemory main;
 	Boolean verbose = false;
@@ -15,7 +15,7 @@ public class caseTwo {
 
 	/***Execute the HOS on Case Two***/
 	public void run() {
-		while(!caseComplete) {
+		while(!caseTerminated) {
 			if(verbose) { System.out.println("I'm running!"); }
 			//Assign Jobs to memory
 			Boolean assigned = false;
@@ -107,13 +107,13 @@ public class caseTwo {
 
 			//Break the while loop if all jobs are done.
 			if(!jobs.getUnfinishedJobs()) {
-				caseComplete = true;
+				caseTerminated = true;
 			}
 
 			//Break the while loop if one more tick will be the 30th (max) tick, per the instructions.
 			//Comment this out if you wish for the program to execute until ALL jobs reach a "Finished" state.
-			if(tick >= 30) {
-				caseComplete = true;
+			if(countoftimeSliceFull >= 30) {
+				caseTerminated = true;
 			}
 		}
 
@@ -124,10 +124,10 @@ public class caseTwo {
 
 	/***Tick Function***/
 	public void tick() {
-		tick++;
+		countoftimeSliceFull++;
 		main.timeSliceFull();
 		System.out.println("=========================================================================");
-		System.out.println("Tick: " + tick);
+		System.out.println("Time Unit Total: " + countoftimeSliceFull);
 		System.out.println(jobs.toString());
 		System.out.println("Waiting: " + jobs.numberOfWaitingJobs() + "\t\t");
 		System.out.println("Total Memory Wasted: " + main.totalWastedMemory());
@@ -141,7 +141,7 @@ public class caseTwo {
 	}
 
 	public int numberOfFinishedJobs() {
-		if(tick < 30) {
+		if(countoftimeSliceFull < 30) {
 			//The case hasn't been run yet... return a null value.
 			return -1;
 		}

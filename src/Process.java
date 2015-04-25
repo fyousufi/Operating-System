@@ -1,4 +1,4 @@
-public class Job {
+public class Process {
 	/***Variables***/
 	int id;
 	int memRequest;
@@ -8,7 +8,7 @@ public class Job {
 	String status;
 
 	/***Constructors***/
-	public Job() {
+	public Process() {
 		id = -1;
 		memRequest = -1;
 		timeRequest = -1;
@@ -17,7 +17,7 @@ public class Job {
 		status = "Waiting";
 	}
 
-	public Job(int id, int memRequest, int timeRequest, int memAssigned, int timeRemain, String status) {
+	public Process(int id, int memRequest, int timeRequest, int memAssigned, int timeRemain, String status) {
 		this.id = id;
 		this.memRequest = memRequest;
 		this.timeRequest = timeRequest;
@@ -26,13 +26,13 @@ public class Job {
 		this.status = status;
 	}
 
-	public Job(Job job) {
-		this.id = job.getID();
-		this.memRequest = job.getMemRequest();
-		this.timeRequest = job.getTimeRequest();
-		this.memAssigned = job.getMemAssigned();
-		this.timeRemain = job.getTimeRemain();
-		this.status = job.getStatus();
+	public Process(Process process) {
+		this.id = process.getID();
+		this.memRequest = process.getMemRequest();
+		this.timeRequest = process.getTimeRequest();
+		this.memAssigned = process.getMemAssigned();
+		this.timeRemain = process.getTimeRemain();
+		this.status = process.getStatus();
 	}
 
 	/***Setters***/
@@ -95,7 +95,7 @@ public class Job {
 
 	/***Test***/
 	public static void main(String[] args) {
-		Job test = new Job();
+		Process test = new Process();
 		test.setID(10);
 		test.setMemRequest(3);
 		test.setTimeRequest(8);

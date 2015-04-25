@@ -7,7 +7,7 @@ public class OS {
 	
 	Queue jobs;
 	MainMemory mainMemory;
-	JobGenerator jobGenerator;
+	ProcessGenerator processGenerator;
 
 	/***Constructor***/
 	public OS(int casetype, Boolean verbose) {
@@ -16,7 +16,7 @@ public class OS {
 
 		// Construct the hardware
 		jobs = new Queue();
-		jobGenerator = new JobGenerator(jobs);
+		processGenerator = new ProcessGenerator(jobs);
 		mainMemory = new MainMemory();
 		
 		if (verbose == true) {

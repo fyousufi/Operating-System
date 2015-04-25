@@ -1,7 +1,7 @@
 public class caseOne {
 	/***Variables***/
 	Boolean caseTerminated = false;
-	int timeUnit = 0;
+	int countoftimeSliceFull = 0;
 	Queue jobs;
 	MainMemory main;
 	Boolean verbose = false;
@@ -92,39 +92,32 @@ public class caseOne {
 			timeUnit();
 
 			//Break the while loop if all jobs are done.
-<<<<<<< HEAD
-			if(!jobs.getAnyUnfinishedJobs()) {
-				caseTerminated = true;
-=======
 			if(!jobs.getUnfinishedJobs()) {
-				caseComplete = true;
->>>>>>> origin/master
-			}
-
-			//Break the while loop if one more tick will be the 30th (max) tick, per the instructions.
-			//Comment this out if you wish for the program to execute until ALL jobs reach a "Finished" state.
-			if(timeUnit >= 30) {
 				caseTerminated = true;
-			}
-		}
+				if(!jobs.getUnfinishedJobs()) {
+					caseTerminated = true;
 
-		//Now that this case has executed, output the total number of jobs completed.
-		numberOfFinishedJobs = jobs.numberOfFinishedJobs();
-		System.out.println("Total number of finished jobs: " + numberOfFinishedJobs);
-	}
+				}
+
+				//Break the while loop if one more tick will be the 30th (max) tick, per the instructions.
+				//Comment this out if you wish for the program to execute until ALL jobs reach a "Finished" state.
+				if(countoftimeSliceFull >= 30) {
+					caseTerminated = true;
+				}
+			}
+
+			//Now that this case has executed, output the total number of jobs completed.
+			numberOfFinishedJobs = jobs.numberOfFinishedJobs();
+			System.out.println("Total number of finished jobs: " + numberOfFinishedJobs);
+		}
+	} 
 
 	/***Tick***/
-<<<<<<< HEAD
 	public void timeUnit() {
-		timeUnit++;
-		main.tick();
-=======
-	public void tick() {
-		tick++;
+		countoftimeSliceFull++;
 		main.timeSliceFull();
->>>>>>> origin/master
 		System.out.println("=========================================================================");
-		System.out.println("Tick: " + timeUnit);
+		System.out.println("Time Unit Total: " + countoftimeSliceFull);
 		System.out.println(jobs.toString());
 		System.out.println("Waiting: " + jobs.numberOfWaitingJobs() + "\t\t");
 		System.out.println("Total Memory Wasted: " + main.totalWastedMemory());
@@ -138,7 +131,7 @@ public class caseOne {
 	}
 
 	public int numberOfFinishedJobs() {
-		if(timeUnit < 30) {
+		if(countoftimeSliceFull < 30) {
 			//The case hasn't been run yet... return a null value.
 			return -1;
 		}

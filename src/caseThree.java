@@ -1,6 +1,6 @@
 public class caseThree {
 	/***Variables***/
-	Boolean caseComplete = false;
+	Boolean caseTerminated = false;
 	int countoftimeSliceFull = 0;
 	Queue jobs;
 	Queue SJFjobs; //Copy of jobs ordered from the shortest job first to the longest job last
@@ -18,7 +18,7 @@ public class caseThree {
 
 	/***Execute the HOS on Case Type 3***/
 	public void run() {
-		while(!caseComplete) {
+		while(!caseTerminated) {
 			if(verbose) { System.out.println("I'm running!"); }
 			//Assign Jobs to memory
 			Boolean assigned = false;
@@ -111,13 +111,13 @@ public class caseThree {
 
 			//Break the while loop if all jobs are done.
 			if(!jobs.getUnfinishedJobs()) {
-				caseComplete = true;
+				caseTerminated = true;
 			}
 
 			//Break the while loop if one more tick will be the 30th (max) tick, per the instructions.
 			//Comment this out if you wish for the program to execute until ALL jobs reach a "Finished" state.
 			if(countoftimeSliceFull >= 30) {
-				caseComplete = true;
+				caseTerminated = true;
 			}
 		}
 
@@ -129,15 +129,9 @@ public class caseThree {
 	/***Tick Function***/
 	public void timeSliceFull() {
 		countoftimeSliceFull++;
-		main.tick();
-
-	}
-	
-	public void tick() {
-		tick++;
 		main.timeSliceFull();
 		System.out.println("=========================================================================");
-		System.out.println("Tick: " + countoftimeSliceFull);
+		System.out.println("Time Unit Total: " + countoftimeSliceFull);
 		System.out.println(jobs.toString());
 		System.out.println("Waiting: " + jobs.numberOfWaitingJobs() + "\t\t");
 		System.out.println("Total Memory Wasted: " + main.totalWastedMemory());

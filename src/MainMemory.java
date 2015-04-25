@@ -25,10 +25,10 @@ public class MainMemory {
 
 	/***Functions***/
 	// Assign a memory position
-	public Boolean assignMemory(int segmentNumber, Job job) {
-		if (job.getMemRequest() < Memory[segmentNumber].getSize()) {
+	public Boolean assignMemory(int segmentNumber, Process process) {
+		if (process.getMemRequest() < Memory[segmentNumber].getSize()) {
 			if (!Memory[segmentNumber].getInUse()) {
-				Memory[segmentNumber].setJob(job);
+				Memory[segmentNumber].setJob(process);
 				setInUse(segmentNumber, true);
 
 				// Change the relevant values in the job
@@ -290,7 +290,7 @@ public class MainMemory {
 
 		System.out.println(test.toString());
 
-		Job myTestJob = new Job(3, 24, 5, 0, 5, "Ready");
+		Process myTestJob = new Process(3, 24, 5, 0, 5, "Ready");
 		test.assignMemory(myTestJob.getMemAssigned(), myTestJob);
 
 		System.out.println(test.toString());
