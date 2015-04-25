@@ -1,6 +1,6 @@
 public class OS {
 	/***Variables***/
-	int casetype;
+	int caseNumber;
 	Boolean verbose;
 
 	Queue jobs;
@@ -9,7 +9,7 @@ public class OS {
 
 	/***Constructor***/
 	public OS(int casetype, Boolean verbose) {
-		this.casetype = casetype;
+		this.caseNumber = casetype;
 		this.verbose = verbose;
 
 		//Construct the hardware
@@ -25,28 +25,28 @@ public class OS {
 
 	/***Start***/
 	public void start() {
-		if(casetype == 1) {
+		if(caseNumber == 1) {
 			//Operate casetype 1
 			caseOne execute = new caseOne(jobs, main);
 			execute.setVerbose(verbose);
 			execute.run();
 		}
 
-		else if(casetype == 2) {
+		else if(caseNumber == 2) {
 			//Operate casetype 2
 			caseTwo execute = new caseTwo(jobs, main);
 			execute.setVerbose(verbose);
 			execute.run();
 		}
 
-		else if(casetype == 3) {
+		else if(caseNumber == 3) {
 			//Operate casetype 3
 			caseThree execute = new caseThree(jobs, main);
 			execute.setVerbose(verbose);
 			execute.run();
 		}
 
-		else if(casetype == 4) {
+		else if(caseNumber == 4) {
 			//Operate casetype 4
 			caseOne executeOne;
 			caseTwo executeTwo;
