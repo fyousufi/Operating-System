@@ -1,4 +1,4 @@
-public class HOS {
+public class OS {
 	/***Variables***/
 	int casetype;
 	Boolean verbose;
@@ -8,7 +8,7 @@ public class HOS {
 	JobGenerator generator;
 
 	/***Constructor***/
-	public HOS(int casetype, Boolean verbose) {
+	public OS(int casetype, Boolean verbose) {
 		this.casetype = casetype;
 		this.verbose = verbose;
 
@@ -125,7 +125,7 @@ public class HOS {
 		/***Variables***/
 		int casetype;
 		Boolean verbose;
-		HOS operatingsystem;
+		OS operatingsystem;
 
 		//Initialize important variables
 		verbose = false; casetype = 1;
@@ -200,7 +200,7 @@ public class HOS {
 
 		//Execute the HOS
 		if(casetype != -1) {
-			operatingsystem =  new HOS(casetype, verbose);
+			operatingsystem =  new OS(casetype, verbose);
 			operatingsystem.start();
 		}
 	}
