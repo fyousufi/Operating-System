@@ -127,15 +127,15 @@ public class caseThree {
 	}
 
 	/***Tick Function***/
-<<<<<<< HEAD
 	public void timeSliceFull() {
 		countoftimeSliceFull++;
 		main.tick();
-=======
+
+	}
+	
 	public void tick() {
 		tick++;
 		main.timeSliceFull();
->>>>>>> origin/master
 		System.out.println("=========================================================================");
 		System.out.println("Tick: " + countoftimeSliceFull);
 		System.out.println(jobs.toString());

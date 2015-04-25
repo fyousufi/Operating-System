@@ -31,18 +31,9 @@ public class OS {
 		if (caseNumber == 1) { // Operate caseNumber 1
 			caseOne execute = new caseOne(jobs, mainMemory);
 			execute.setVerbose(verbose);
-<<<<<<< HEAD
 			execute.executeOS();
-		}
-
-		else if(caseNumber == 2) {
-			//Operate casetype 2
-			caseTwo execute = new caseTwo(jobs, main);
-=======
-			execute.run();
 		} else if (caseNumber == 2) { // Operate caseNumber 2
 			caseTwo execute = new caseTwo(jobs, mainMemory);
->>>>>>> origin/master
 			execute.setVerbose(verbose);
 			execute.run();
 		} else if (caseNumber == 3) { // Operate caseNumber 3
