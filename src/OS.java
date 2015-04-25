@@ -29,7 +29,7 @@ public class OS {
 			//Operate casetype 1
 			caseOne execute = new caseOne(jobs, main);
 			execute.setVerbose(verbose);
-			execute.run();
+			execute.executeOS();
 		}
 
 		else if(caseNumber == 2) {
@@ -61,7 +61,7 @@ public class OS {
 			System.out.println("=======================================================");
 			executeOne = new caseOne(jobs, main);
 			executeOne.setVerbose(verbose);
-			executeOne.run();
+			executeOne.executeOS();
 
 			//Start process 2
 			System.out.println("=======================================================");

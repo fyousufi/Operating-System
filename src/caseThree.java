@@ -1,7 +1,7 @@
 public class caseThree {
 	/***Variables***/
 	Boolean caseComplete = false;
-	int tick = 0;
+	int countoftimeSliceFull = 0;
 	Queue jobs;
 	Queue SJFjobs; //Copy of jobs ordered from the shortest job first to the longest job last
 	MainMemory main;
@@ -107,7 +107,7 @@ public class caseThree {
 			}
 
 			//Increase the tick by 1.
-			tick();
+			timeSliceFull();
 
 			//Break the while loop if all jobs are done.
 			if(!jobs.getAnyUnfinishedJobs()) {
@@ -116,7 +116,7 @@ public class caseThree {
 
 			//Break the while loop if one more tick will be the 30th (max) tick, per the instructions.
 			//Comment this out if you wish for the program to execute until ALL jobs reach a "Finished" state.
-			if(tick >= 30) {
+			if(countoftimeSliceFull >= 30) {
 				caseComplete = true;
 			}
 		}
@@ -127,11 +127,11 @@ public class caseThree {
 	}
 
 	/***Tick Function***/
-	public void tick() {
-		tick++;
+	public void timeSliceFull() {
+		countoftimeSliceFull++;
 		main.tick();
 		System.out.println("=========================================================================");
-		System.out.println("Tick: " + tick);
+		System.out.println("Tick: " + countoftimeSliceFull);
 		System.out.println(jobs.toString());
 		System.out.println("Waiting: " + jobs.numberOfWaitingJobs() + "\t\t");
 		System.out.println("Total Memory Wasted: " + main.totalWastedMemory());
@@ -145,7 +145,7 @@ public class caseThree {
 	}
 
 	public int numberOfFinishedJobs() {
-		if(tick < 30) {
+		if(countoftimeSliceFull < 30) {
 			//The case hasn't been run yet... return a null value.
 			return -1;
 		}
