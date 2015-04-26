@@ -1,37 +1,37 @@
 public class Process {
 	/***Variables***/
 	int id;
-	int memRequest;
+	int memoryRequest;
 	int timeRequest;
-	int memAssigned;
-	int timeRemain;
+	int memoryAssigned;
+	int timeRemaining;
 	String status;
 
 	/***Constructors***/
 	public Process() {
 		id = -1;
-		memRequest = -1;
+		memoryRequest = -1;
 		timeRequest = -1;
-		memAssigned = -1;
-		timeRemain = timeRequest;
+		memoryAssigned = -1;
+		timeRemaining = timeRequest;
 		status = "Waiting";
 	}
 
-	public Process(int id, int memRequest, int timeRequest, int memAssigned, int timeRemain, String status) {
+	public Process(int id, int memRequest, int timeRequest, int memAssigned, int timeRemaining, String status) {
 		this.id = id;
-		this.memRequest = memRequest;
+		this.memoryRequest = memRequest;
 		this.timeRequest = timeRequest;
-		this.memAssigned = memAssigned;
-		this.timeRemain = timeRemain;
+		this.memoryAssigned = memAssigned;
+		this.timeRemaining = timeRemaining;
 		this.status = status;
 	}
 
 	public Process(Process process) {
 		this.id = process.getID();
-		this.memRequest = process.getMemRequest();
+		this.memoryRequest = process.getMemoryRequest();
 		this.timeRequest = process.getTimeRequest();
-		this.memAssigned = process.getMemAssigned();
-		this.timeRemain = process.getTimeRemain();
+		this.memoryAssigned = process.getMemoryAssigned();
+		this.timeRemaining = process.getTimeRemaining();
 		this.status = process.getStatus();
 	}
 
@@ -40,24 +40,24 @@ public class Process {
 		this.id = id;
 	}
 
-	public void setMemRequest(int memRequest) {
-		this.memRequest = memRequest;
+	public void setMemoryRequest(int memoryRequest) {
+		this.memoryRequest = memoryRequest;
 	}
 
 	public void setTimeRequest(int timeRequest) {
 		this.timeRequest = timeRequest;
 	}
 
-	public void setMemAssigned(int memAssigned) {
-		this.memAssigned = memAssigned;
+	public void setMemoryAssigned(int memoryAssigned) {
+		this.memoryAssigned = memoryAssigned;
 	}
 
-	public void setTimeRemain(int timeRemain) {
-		this.timeRemain = timeRemain;
+	public void setTimeRemaining(int timeRemaining) {
+		this.timeRemaining = timeRemaining;
 	}
 
 	public void setStatus(String status) {
-		if(status == "Waiting" || status == "Ready" || status == "Running" || status == "Finished") {
+		if (status == "Waiting" || status == "Ready" || status == "Running" || status == "Finished") {
 			this.status = status;
 		}
 	}
@@ -67,20 +67,20 @@ public class Process {
 		return id;
 	}
 
-	public int getMemRequest() {
-		return memRequest;
+	public int getMemoryRequest() {
+		return memoryRequest;
 	}
 
 	public int getTimeRequest() {
 		return timeRequest;
 	}
 
-	public int getMemAssigned() {
-		return memAssigned;
+	public int getMemoryAssigned() {
+		return memoryAssigned;
 	}
 
-	public int getTimeRemain() {
-		return timeRemain;
+	public int getTimeRemaining() {
+		return timeRemaining;
 	}
 
 	public String getStatus() {
@@ -89,19 +89,7 @@ public class Process {
 
 	/***toString***/
 	public String toString() {
-		return id + " " + memRequest + " " + timeRequest + " " + memAssigned + " "
-				+ timeRemain + " " + status;
-	}
-
-	/***Test***/
-	public static void main(String[] args) {
-		Process test = new Process();
-		test.setID(10);
-		test.setMemRequest(3);
-		test.setTimeRequest(8);
-		test.setMemAssigned(2);
-		test.setTimeRemain(7);
-		test.setStatus("Waiting");
-		System.out.println(test.toString());
+		return id + " " + memoryRequest + " " + timeRequest + " " + memoryAssigned + " "
+				+ timeRemaining + " " + status;
 	}
 }

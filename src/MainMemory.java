@@ -26,7 +26,7 @@ public class MainMemory {
 	/***Functions***/
 	// Assign a memory position
 	public Boolean assignMemory(int segmentNumber, Process process) {
-		if (process.getMemRequest() < Memory[segmentNumber].getSize()) {
+		if (process.getMemoryRequest() < Memory[segmentNumber].getSize()) {
 			if (!Memory[segmentNumber].getInUse()) {
 				Memory[segmentNumber].setJob(process);
 				setInUse(segmentNumber, true);
@@ -193,7 +193,7 @@ public class MainMemory {
 	}
 
 	public void setMemoryRequest(int segmentNumber, int memoryRequest) {
-		(Memory[segmentNumber].getJob()).setMemRequest(memoryRequest);
+		(Memory[segmentNumber].getJob()).setMemoryRequest(memoryRequest);
 	}
 
 	public void setTimeRequest(int segmentNumber, int timeRequest) {
@@ -201,11 +201,11 @@ public class MainMemory {
 	}
 
 	public void setMemoryAssigned(int segmentNumber, int memoryAssigned) {
-		(Memory[segmentNumber].getJob()).setMemAssigned(memoryAssigned);
+		(Memory[segmentNumber].getJob()).setMemoryAssigned(memoryAssigned);
 	}
 
 	public void setTimeRemaining(int segmentNumber, int timeRemaining) {
-		(Memory[segmentNumber].getJob()).setTimeRemain(timeRemaining);
+		(Memory[segmentNumber].getJob()).setTimeRemaining(timeRemaining);
 	}
 
 	public void setStatus(int segmentNumber, String status) {
@@ -236,7 +236,7 @@ public class MainMemory {
 	}
 
 	public int getMemoryRequest(int segmentNumber) {
-		return (Memory[segmentNumber].getJob()).getMemRequest();
+		return (Memory[segmentNumber].getJob()).getMemoryRequest();
 	}
 
 	public int getTimeRequest(int segmentNumber) {
@@ -244,11 +244,11 @@ public class MainMemory {
 	}
 
 	public int getMemoryAssigned(int segmentNumber) {
-		return (Memory[segmentNumber].getJob()).getMemAssigned();
+		return (Memory[segmentNumber].getJob()).getMemoryAssigned();
 	}
 
 	public int getTimeRemaining(int segmentNumber) {
-		return (Memory[segmentNumber].getJob()).getTimeRemain();
+		return (Memory[segmentNumber].getJob()).getTimeRemaining();
 	}
 
 	public String getStatus(int segmentNumber) {
@@ -278,24 +278,5 @@ public class MainMemory {
 		}
 
 		return output;
-	}
-
-	/***Main***/
-	public static void main(String[] args) {
-		//Test driver
-		System.out.println("Testing...");
-		System.out.println("Test wrttien by Matt Silvey.");
-
-		MainMemory test = new MainMemory();
-
-		System.out.println(test.toString());
-
-		Process myTestJob = new Process(3, 24, 5, 0, 5, "Ready");
-		test.assignMemory(myTestJob.getMemAssigned(), myTestJob);
-
-		System.out.println(test.toString());
-
-		test.setTimeRemaining(0, 4);
-		System.out.println(test.toString());
 	}
 }

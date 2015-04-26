@@ -1,7 +1,7 @@
 public class Queue {
 	/***Variables***/
 	public Process[] jobQueue;
-	public static final int NUMBER_OF_JOBS = 20;
+	private static final int NUMBER_OF_JOBS = 20;
 	
 	/***Constructor***/
 	public Queue() {
@@ -27,7 +27,7 @@ public class Queue {
 	}
 
 	public int getMemoryRequest(int segment) {
-		return jobQueue[segment].getMemRequest();
+		return jobQueue[segment].getMemoryRequest();
 	}
 
 	public int getTimeRequest(int segment) {
@@ -35,11 +35,11 @@ public class Queue {
 	}
 
 	public int getMemoryAssigned(int segment) {
-		return jobQueue[segment].getMemAssigned();
+		return jobQueue[segment].getMemoryAssigned();
 	}
 
 	public int getTimeRemaining(int segment) {
-		return jobQueue[segment].getTimeRemain();
+		return jobQueue[segment].getTimeRemaining();
 	}
 
 	public String getStatus(int segment) {
@@ -60,7 +60,7 @@ public class Queue {
 	}
 
 	public void setMemoryRequest(int segment, int memoryRequest) {
-		jobQueue[segment].setMemRequest(memoryRequest);
+		jobQueue[segment].setMemoryRequest(memoryRequest);
 	}
 
 	public void setTimeRequest(int segment, int timeRequest) {
@@ -68,11 +68,11 @@ public class Queue {
 	}
 
 	public void setMemoryAssigned(int segment, int memoryAssigned) {
-		jobQueue[segment].setMemAssigned(memoryAssigned);
+		jobQueue[segment].setMemoryAssigned(memoryAssigned);
 	}
 
 	public void setTimeRemaining(int segment, int timeRemaining) {
-		jobQueue[segment].setTimeRemain(timeRemaining);
+		jobQueue[segment].setTimeRemaining(timeRemaining);
 	}
 
 	public void setStatus(int segment, String status) {
@@ -165,35 +165,14 @@ public class Queue {
 		for (int i = 0; i < getLength(); i++) {
 			output += jobQueue[i].getTimeRequest() + "\t";
 			output += jobQueue[i].getID() + "\t";
-			output += jobQueue[i].getMemAssigned() + "\t";
-			output += jobQueue[i].getMemRequest() + "\t\t";
-			output += jobQueue[i].getTimeRemain() + "\t\t";
+			output += jobQueue[i].getMemoryAssigned() + "\t";
+			output += jobQueue[i].getMemoryRequest() + "\t\t";
+			output += jobQueue[i].getTimeRemaining() + "\t\t";
 			output += jobQueue[i].getStatus() + "\n";
 		}
 
 		output += "=========================================================================";
 
 		return output;
-	}
-
-	/***Driver for shortestJobs Function***/
-	public static void main(String args[]) {
-		// Written to test the shortestJobs function
-		Queue first = new Queue();
-		Queue second = new Queue();
-
-		// Add data to the queue
-		for (int i = 0; i < first.getLength(); i++) {
-			first.setMemoryRequest(i, (int)(Math.random() * 100));
-			first.setID(i, i);
-			first.setStatus(i, "Waiting");
-			first.setTimeRequest(i, (int)(Math.random() * 10));
-		}
-
-		System.out.println("First:\n" + first.toString());
-
-		second = first.shortestJobs();
-
-		System.out.println("Second:\n" + second.toString());
 	}
 }

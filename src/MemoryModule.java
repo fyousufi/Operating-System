@@ -3,7 +3,7 @@ public class MemoryModule {
 	
 	/***Variables***/
 	int segmentNumber;
-	int size; // in kilobytes
+	int size; // in KB
 	Boolean inUse;
 	int wastedSpace;
 	Process process;
@@ -17,12 +17,12 @@ public class MemoryModule {
 		process = new Process();
 	}
 
-	public MemoryModule(int segmentNumber, int size, Boolean inUse, int wastedSpace, Process myJob) {
+	public MemoryModule(int segmentNumber, int size, Boolean inUse, int wastedSpace, Process job) {
 		this.segmentNumber = segmentNumber;
 		this.size = size;
 		this.inUse = inUse;
 		this.wastedSpace = wastedSpace;
-		this.process = myJob;
+		this.process = job;
 	}
 
 	/***Getters***/
@@ -63,7 +63,7 @@ public class MemoryModule {
 		this.wastedSpace = wastedSpace;
 	}
 
-	public void setJob(Process myJob) {
-		this.process = myJob;
+	public void setJob(Process job) {
+		this.process = job;
 	}
 }
