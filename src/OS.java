@@ -78,9 +78,9 @@ public class OS {
 
 			// Compare the number of finished jobs for each case type
 			System.out.println("\n\n\n");
-			System.out.println("Case One Finished " + executeOne.numberOfFinishedProcesses() + " Jobs.");
-			System.out.println("Case Two Finished " + executeTwo.numberOfFinishedProcesses() + " Jobs.");
-			System.out.println("Case Three Finished " + executeThree.numberOfFinishedProcesses() + " Jobs.");
+			System.out.println("Case One Finished " + executeOne.numberOfFinishedProcesses() + " Processes.");
+			System.out.println("Case Two Finished " + executeTwo.numberOfFinishedProcesses() + " Processes.");
+			System.out.println("Case Three Finished " + executeThree.numberOfFinishedProcesses() + " Processes.");
 			
 			if (executeOne.numberOfFinishedProcesses() > executeTwo.numberOfFinishedProcesses() && executeOne.numberOfFinishedProcesses() > executeThree.numberOfFinishedProcesses()) {
 				System.out.println("Case One completed the most processes.");

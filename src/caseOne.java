@@ -13,7 +13,7 @@ public class caseOne {
 		this.main = main;
 	}
 
-	/***Execute the HOS on Case One***/
+	/***Execute the OS on Case One***/
 	public void executeOS() {
 		while (!caseTerminated) {
 

@@ -13,7 +13,7 @@ public class caseTwo {
 		this.main = main;
 	}
 
-	/***Execute the HOS on Case Two***/
+	/***Execute the OS on Case Two***/
 	public void run() {
 		while (!caseTerminated) {
 			if (verbose) { System.out.println("I'm running!"); }
@@ -121,7 +121,7 @@ public class caseTwo {
 
 		// Now that this case has executed, output the total number of jobs completed.
 		numberOfFinishedProcesses = processes.numberOfFinishedProcess();
-		System.out.println("Total number of finished jobs: " + numberOfFinishedProcesses);
+		System.out.println("Total number of finished processes: " + numberOfFinishedProcesses);
 	}
 
 	/***Tick Function***/
