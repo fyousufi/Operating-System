@@ -42,9 +42,9 @@ This will compile all java files in the folder. Alternatively, you can compile t
 javac caseOne.java
 javac caseTwo.java
 javac caseThree.java
-javac HOS.java
-javac Job.java
-javac JobGenerator.java
+javac OS.java
+javac Process.java
+javac ProcessGenerator.java
 javac MainMemory.java
 javac MemoryModule.java
 javac Queue.java
@@ -104,15 +104,15 @@ Contains the code for executing the HOS for case two's criteria.
 **caseThree.java**  
 Contains the code for executing the HOS for case three's criteria.
 
-**HOS.java**  
-Contains the core of the HOS. Creates all needed objects, calls the scripts for executing the Jobs, and handles the flags the user passes.
+**OS.java**  
+Contains the core of the OS. Creates all needed objects, calls the scripts for executing the Jobs, and handles the flags the user passes.
 
-**Job.java**  
+**Process.java**  
 Stores information relevant to a specific job/process; also contains
 functions to set and retrieve this information.
 
-**JobGenerator.java**  
-Generates 20 jobs with random/default information for the Queue.
+**ProcessGenerator.java**  
+Generates 20 process with random/default information for the Queue.
 
 **MainMemory.java**  
 Contains all MemoryModule objects, which it creates. It has functions

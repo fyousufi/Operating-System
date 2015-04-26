@@ -40,6 +40,7 @@ public class caseTwo {
 
 				//Increase the count until it equals the position in the job queue of an unassigned Job
 				Boolean testDone = false;
+				
 				while (!testDone) {
 					if (count < processes.getLength()) {
 						if (processes.getStatus(count) == "Waiting") {
@@ -142,7 +143,7 @@ public class caseTwo {
 	}
 
 	public int numberOfFinishedProcesses() {
-		if(countoftimeSliceFull < 30) {
+		if (countoftimeSliceFull < 30) {
 			//The case hasn't been run yet... return a null value.
 			return -1;
 		}

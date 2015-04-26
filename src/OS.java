@@ -5,7 +5,7 @@ public class OS {
 	int caseNumber;
 	Boolean verbose;
 	
-	Queue jobs;
+	Queue processes;
 	MainMemory mainMemory;
 	ProcessGenerator processGenerator;
 
@@ -15,12 +15,12 @@ public class OS {
 		this.verbose = verbose;
 
 		// Construct the hardware
-		jobs = new Queue();
-		processGenerator = new ProcessGenerator(jobs);
+		processes = new Queue();
+		processGenerator = new ProcessGenerator(processes);
 		mainMemory = new MainMemory();
 		
 		if (verbose == true) {
-			System.out.println(jobs.toString());
+			System.out.println(processes.toString());
 			//System.out.println(generator.toString());
 			System.out.println(mainMemory.toString());
 		}
@@ -29,15 +29,15 @@ public class OS {
 	/***Start***/
 	public void start() {
 		if (caseNumber == 1) { // Operate caseNumber 1
-			caseOne execute = new caseOne(jobs, mainMemory);
+			caseOne execute = new caseOne(processes, mainMemory);
 			execute.setVerbose(verbose);
 			execute.executeOS();
 		} else if (caseNumber == 2) { // Operate caseNumber 2
-			caseTwo execute = new caseTwo(jobs, mainMemory);
+			caseTwo execute = new caseTwo(processes, mainMemory);
 			execute.setVerbose(verbose);
 			execute.run();
 		} else if (caseNumber == 3) { // Operate caseNumber 3
-			caseThree execute = new caseThree(jobs, mainMemory);
+			caseThree execute = new caseThree(processes, mainMemory);
 			execute.setVerbose(verbose);
 			execute.run();
 		} else if (caseNumber == 4) { // Operate caseNumber 4
@@ -46,13 +46,13 @@ public class OS {
 			caseThree executeThree;
 
 			// Make a copy of the original array, so that all three executions share the same input data
-			Queue queueCopy = new Queue(jobs);
+			Queue queueCopy = new Queue(processes);
 
 			// Start process 1
 			System.out.println("=======================================================");
 			System.out.println("==Case One=============================================");
 			System.out.println("=======================================================");
-			executeOne = new caseOne(jobs, mainMemory);
+			executeOne = new caseOne(processes, mainMemory);
 			executeOne.setVerbose(verbose);
 			executeOne.executeOS();
 
@@ -61,8 +61,8 @@ public class OS {
 			System.out.println("==Case Two=============================================");
 			System.out.println("=======================================================");
 			mainMemory = new MainMemory();
-			jobs = new Queue(queueCopy);
-			executeTwo = new caseTwo(jobs, mainMemory);
+			processes = new Queue(queueCopy);
+			executeTwo = new caseTwo(processes, mainMemory);
 			executeTwo.setVerbose(verbose);
 			executeTwo.run();
 
@@ -71,8 +71,8 @@ public class OS {
 			System.out.println("==Case Three===========================================");
 			System.out.println("=======================================================");
 			mainMemory = new MainMemory();
-			jobs = new Queue(queueCopy);
-			executeThree = new caseThree(jobs, mainMemory);
+			processes = new Queue(queueCopy);
+			executeThree = new caseThree(processes, mainMemory);
 			executeThree.setVerbose(verbose);
 			executeThree.run();
 
@@ -137,7 +137,7 @@ public class OS {
 			}
 
 			//Execute the OS
-			System.out.println("Executing the HOS with case " + caseNumber + ".");
+			System.out.println("Executing the OS with case " + caseNumber + ".");
 		} else if (args.length == 1) {
 			//The user only passed an arg1
 			caseNumber = Integer.parseInt(args[0]);
@@ -149,13 +149,13 @@ public class OS {
 			}
 
 			// Execute the OS
-			System.out.println("Executing the HOS with case " + caseNumber + ".");
+			System.out.println("Executing the OS with case " + caseNumber + ".");
 		} else if (args.length == 0) {
 			// The user passed no args, make the arg the default values
-			System.out.println("NOTE: Arguments not specified. HOS will execute,");
+			System.out.println("NOTE: Arguments not specified. OS will execute,");
 			System.out.println("      assuming default values (case 1, quiet).");
 			System.out.println("Please pass either one or two arguments to");
-			System.out.println("to specify how the HOS should operate.");
+			System.out.println("to specify how the OS should operate.");
 			caseNumber = 1;
 			verbose = false;
 		} else {
@@ -164,18 +164,18 @@ public class OS {
 			System.out.println("two arguments.");
 			System.out.println("Arg1: The case to execute (case one, case two, or");
 			System.out.println("      case three). See README for more information.");
-			System.out.println("Arg2: (Optional) Use 'v' to make the HOS print");
+			System.out.println("Arg2: (Optional) Use 'v' to make the OS print");
 			System.out.println("      its process verbosely.");
 			System.out.println("Example:");
-			System.out.println("java HOS 4 v");
-			System.out.println("	-This will execute the HOS, all cases");
+			System.out.println("java OS 4 v");
+			System.out.println("	-This will execute the OS, all cases");
 			System.out.println("	 consecutively, in a verbose manner.");
-			System.out.println("java HOS 2 v");
-			System.out.println("     -This will execute the HOS, case 2, verbose.");
-			System.out.println("java HOS 3");
-			System.out.println("     -This will execute the HOS, case 3, quiet.");
-			System.out.println("java HOS");
-			System.out.println("     -This will execute the HOS with default");
+			System.out.println("java OS 2 v");
+			System.out.println("     -This will execute the OS, case 2, verbose.");
+			System.out.println("java OS 3");
+			System.out.println("     -This will execute the OS, case 3, quiet.");
+			System.out.println("java OS");
+			System.out.println("     -This will execute the OS with default");
 			System.out.println("       values - case 1, quiet.");
 			caseNumber = -1;
 		}

@@ -20,7 +20,7 @@ public class caseOne {
 			// Assign Jobs to memory
 			Boolean assigned = false;
 			int count = 0;
-			
+
 			while (!assigned) {
 				// If there are no available positions in the memory left
 				if (!main.memoryAvailable()) {
@@ -40,7 +40,7 @@ public class caseOne {
 
 				// Increase the count until it equals the position in the job queue of an unassigned Job
 				Boolean testDone = false;
-				
+
 				while (!testDone) {
 					if (count < processes.getLength()) {
 						if (processes.getStatus(count) == "Waiting") {
@@ -63,7 +63,7 @@ public class caseOne {
 					if (count < processes.getLength()) {
 						// During this tick, there are still Jobs that haven't been checked that may need to be assigned.
 						Boolean success = false;
-						
+
 						for (int i = main.firstAvailableMemorySlot(); i < main.size && success == false; i++) {
 							if (!main.getInUse(i)) {
 								// This memory module is not in use.
@@ -94,17 +94,13 @@ public class caseOne {
 			// Break the while loop if all jobs are done.
 			if (!processes.getUnfinishedProcess()) {
 				caseTerminated = true;
-				
-				if (!processes.getUnfinishedProcess()) {
-					caseTerminated = true;
 
-				}
-
-				// Break the while loop if one more tick will be the 30th (max) tick, per the instructions.
-				// Comment this out if you wish for the program to execute until ALL jobs reach a "Finished" state.
-				if (countoftimeSliceFull >= 30) {
-					caseTerminated = true;
-				}
+			}
+			
+			// Break the while loop if one more tick will be the 30th (max) tick, per the instructions.
+			// Comment this out if you wish for the program to execute until ALL jobs reach a "Finished" state.
+			if (countoftimeSliceFull >= 30) {
+				caseTerminated = true;
 			}
 
 			// Now that this case has executed, output the total number of jobs completed.
