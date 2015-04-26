@@ -1,90 +1,90 @@
 public class Queue {
 	/***Variables***/
-	public Process[] jobQueue;
+	public Process[] processQueue;
 	private static final int NUMBER_OF_JOBS = 20;
 	
 	/***Constructor***/
 	public Queue() {
-		jobQueue = new Process[NUMBER_OF_JOBS];
+		processQueue = new Process[NUMBER_OF_JOBS];
 		
 		for (int i = 0; i < NUMBER_OF_JOBS; i++) {
-			jobQueue[i] = new Process();
+			processQueue[i] = new Process();
 		}
 	}
 
 	public Queue(Queue queue) {
-		jobQueue = new Process[queue.getLength()];
+		processQueue = new Process[queue.getLength()];
 		
 		for(int i = 0; i < queue.getLength(); i++) {
-			Process temp = new Process(queue.getJob(i));
-			setJob(i, temp);
+			Process temp = new Process(queue.getProcess(i));
+			setProcess(i, temp);
 		}
 	}
 
 	/***Getters***/
 	public int getID(int segment) {
-		return jobQueue[segment].getID();
+		return processQueue[segment].getID();
 	}
 
 	public int getMemoryRequest(int segment) {
-		return jobQueue[segment].getMemoryRequest();
+		return processQueue[segment].getMemoryRequest();
 	}
 
 	public int getTimeRequest(int segment) {
-		return jobQueue[segment].getTimeRequest();
+		return processQueue[segment].getTimeRequest();
 	}
 
 	public int getMemoryAssigned(int segment) {
-		return jobQueue[segment].getMemoryAssigned();
+		return processQueue[segment].getMemoryAssigned();
 	}
 
 	public int getTimeRemaining(int segment) {
-		return jobQueue[segment].getTimeRemaining();
+		return processQueue[segment].getTimeRemaining();
 	}
 
 	public String getStatus(int segment) {
-		return jobQueue[segment].getStatus();
+		return processQueue[segment].getStatus();
 	}
 
-	public Process getJob(int segment) {
-		return jobQueue[segment];
+	public Process getProcess(int segment) {
+		return processQueue[segment];
 	}
 
 	public int getLength() {
-		return jobQueue.length;
+		return processQueue.length;
 	}
 
 	/***Setters***/
 	public void setID(int segment, int id){
-		jobQueue[segment].setID(id);
+		processQueue[segment].setID(id);
 	}
 
 	public void setMemoryRequest(int segment, int memoryRequest) {
-		jobQueue[segment].setMemoryRequest(memoryRequest);
+		processQueue[segment].setMemoryRequest(memoryRequest);
 	}
 
 	public void setTimeRequest(int segment, int timeRequest) {
-		jobQueue[segment].setTimeRequest(timeRequest);
+		processQueue[segment].setTimeRequest(timeRequest);
 	}
 
 	public void setMemoryAssigned(int segment, int memoryAssigned) {
-		jobQueue[segment].setMemoryAssigned(memoryAssigned);
+		processQueue[segment].setMemoryAssigned(memoryAssigned);
 	}
 
 	public void setTimeRemaining(int segment, int timeRemaining) {
-		jobQueue[segment].setTimeRemaining(timeRemaining);
+		processQueue[segment].setTimeRemaining(timeRemaining);
 	}
 
 	public void setStatus(int segment, String status) {
-		jobQueue[segment].setStatus(status);
+		processQueue[segment].setStatus(status);
 	}
 
-	public void setJob(int segment, Process process) {
-		jobQueue[segment] = process;
+	public void setProcess(int segment, Process process) {
+		processQueue[segment] = process;
 	}
 
 	/***Functions***/
-	public Boolean getUnassignedJobs() {
+	public Boolean getUnassignedProcess() {
 		// Return true if there are any jobs that need to be assigned - false otherwise.
 		for (int i = 0; i < getLength(); i++) {
 			if (getStatus(i) == "Waiting") {
@@ -95,7 +95,7 @@ public class Queue {
 		return false;
 	}
 
-	public Boolean getUnfinishedJobs() {
+	public Boolean getUnfinishedProcess() {
 		// Return true if there are any unfinished jobs.
 		for (int i = 0; i < getLength(); i++) {
 			if (getStatus(i) != "Finished") {
@@ -106,7 +106,7 @@ public class Queue {
 		return false;
 	}
 
-	public int numberOfWaitingJobs() {
+	public int numberOfWaitingProcess() {
 		// Return the number of jobs that are waiting.
 		int count = 0;
 		
@@ -119,7 +119,7 @@ public class Queue {
 		return count;
 	}
 
-	public int numberOfFinishedJobs() {
+	public int numberOfFinishedProcess() {
 		// Return the number of jobs that are finished
 		int count = 0;
 		
@@ -132,21 +132,21 @@ public class Queue {
 		return count;
 	}
 
-	public Queue shortestJobs() {
+	public Queue shortestProcess() {
 		// Return a copy of this queue object ordered from shortest job to longest job
 		Queue queueCopy = new Queue();
 
 		// Copy the current Queue into the copy Queue
 		for (int i = 0; i < getLength(); i++) {
-			queueCopy.setJob(i, getJob(i));
+			queueCopy.setProcess(i, getProcess(i));
 		}
 
 		for (int i = 0; i < getLength() - 1; i++) {
 			for (int j = 0; j < getLength() - 1 - i; j++) {
 				if (queueCopy.getTimeRequest(j) > queueCopy.getTimeRequest(j + 1)) {
-					Process temp = queueCopy.getJob(j);
-					queueCopy.setJob(j, queueCopy.getJob(j + 1));
-					queueCopy.setJob(j + 1, temp);
+					Process temp = queueCopy.getProcess(j);
+					queueCopy.setProcess(j, queueCopy.getProcess(j + 1));
+					queueCopy.setProcess(j + 1, temp);
 				}
 			}
 		}
@@ -163,12 +163,12 @@ public class Queue {
 		output += "----\t--\t-------\t-----------\t-----------\t--------\n";
 
 		for (int i = 0; i < getLength(); i++) {
-			output += jobQueue[i].getTimeRequest() + "\t";
-			output += jobQueue[i].getID() + "\t";
-			output += jobQueue[i].getMemoryAssigned() + "\t";
-			output += jobQueue[i].getMemoryRequest() + "\t\t";
-			output += jobQueue[i].getTimeRemaining() + "\t\t";
-			output += jobQueue[i].getStatus() + "\n";
+			output += processQueue[i].getTimeRequest() + "\t";
+			output += processQueue[i].getID() + "\t";
+			output += processQueue[i].getMemoryAssigned() + "\t";
+			output += processQueue[i].getMemoryRequest() + "\t\t";
+			output += processQueue[i].getTimeRemaining() + "\t\t";
+			output += processQueue[i].getStatus() + "\n";
 		}
 
 		output += "=========================================================================";

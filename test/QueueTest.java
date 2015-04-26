@@ -81,8 +81,8 @@ public class QueueTest {
 
 			Process test = new Process(id, memoryRequest, timeRequest, memoryAssigned, timeRemaining, status);
 
-			queue.setJob(segment, test);
-			assertEquals(test, queue.getJob(segment));
+			queue.setProcess(segment, test);
+			assertEquals(test, queue.getProcess(segment));
 		}
 	}
 
@@ -94,12 +94,12 @@ public class QueueTest {
 			String status = "Waiting";
 			queue.setStatus(i, status);
 
-			if (queue.getUnassignedJobs()) {
+			if (queue.getUnassignedProcess()) {
 				count++;
 			}
 		}
 
-		assertEquals(count, queue.numberOfWaitingJobs());
+		assertEquals(count, queue.numberOfWaitingProcess());
 	}
 
 	@Test
@@ -110,12 +110,12 @@ public class QueueTest {
 			String status = "Ready";
 			queue.setStatus(i, status);
 
-			if (!queue.getUnfinishedJobs()) {
+			if (!queue.getUnfinishedProcess()) {
 				count++;
 			}
 		}
 
-		assertEquals(count, queue.numberOfFinishedJobs());
+		assertEquals(count, queue.numberOfFinishedProcess());
 	}
 	
 	@Test
@@ -127,13 +127,13 @@ public class QueueTest {
 			queue.setTimeRequest(i, (int) (Math.random() * MAX) - MIN);
 		}
 		
-		Queue queueSJF = queue.shortestJobs();
+		Queue queueSJF = queue.shortestProcess();
 		
 		for (int i = 0; i < queue.getLength(); i++) {
-			assertEquals(queueSJF.getMemoryRequest(i), queue.shortestJobs().getMemoryRequest(i));
-			assertEquals(queueSJF.getID(i), queue.shortestJobs().getID(i));
-			assertEquals(queueSJF.getStatus(i), queue.shortestJobs().getStatus(i));
-			assertEquals(queueSJF.getTimeRequest(i), queue.shortestJobs().getTimeRequest(i));
+			assertEquals(queueSJF.getMemoryRequest(i), queue.shortestProcess().getMemoryRequest(i));
+			assertEquals(queueSJF.getID(i), queue.shortestProcess().getID(i));
+			assertEquals(queueSJF.getStatus(i), queue.shortestProcess().getStatus(i));
+			assertEquals(queueSJF.getTimeRequest(i), queue.shortestProcess().getTimeRequest(i));
 		}
 	}
 }

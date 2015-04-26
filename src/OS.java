@@ -78,15 +78,15 @@ public class OS {
 
 			// Compare the number of finished jobs for each case type
 			System.out.println("\n\n\n");
-			System.out.println("Case One Finished " + executeOne.numberOfFinishedJobs() + " Jobs.");
-			System.out.println("Case Two Finished " + executeTwo.numberOfFinishedJobs() + " Jobs.");
-			System.out.println("Case Three Finished " + executeThree.numberOfFinishedJobs() + " Jobs.");
+			System.out.println("Case One Finished " + executeOne.numberOfFinishedProcesses() + " Jobs.");
+			System.out.println("Case Two Finished " + executeTwo.numberOfFinishedProcesses() + " Jobs.");
+			System.out.println("Case Three Finished " + executeThree.numberOfFinishedProcesses() + " Jobs.");
 			
-			if (executeOne.numberOfFinishedJobs() > executeTwo.numberOfFinishedJobs() && executeOne.numberOfFinishedJobs() > executeThree.numberOfFinishedJobs()) {
+			if (executeOne.numberOfFinishedProcesses() > executeTwo.numberOfFinishedProcesses() && executeOne.numberOfFinishedProcesses() > executeThree.numberOfFinishedProcesses()) {
 				System.out.println("Case One completed the most processes.");
-			} else if (executeTwo.numberOfFinishedJobs() > executeOne.numberOfFinishedJobs() && executeTwo.numberOfFinishedJobs() > executeThree.numberOfFinishedJobs()) {
+			} else if (executeTwo.numberOfFinishedProcesses() > executeOne.numberOfFinishedProcesses() && executeTwo.numberOfFinishedProcesses() > executeThree.numberOfFinishedProcesses()) {
 				System.out.println("Case Two completed the most processes.");
-			} else if (executeThree.numberOfFinishedJobs() > executeOne.numberOfFinishedJobs() && executeThree.numberOfFinishedJobs() > executeTwo.numberOfFinishedJobs()) {
+			} else if (executeThree.numberOfFinishedProcesses() > executeOne.numberOfFinishedProcesses() && executeThree.numberOfFinishedProcesses() > executeTwo.numberOfFinishedProcesses()) {
 				System.out.println("Case Three completed the most processes.");
 			} else {
 				System.out.println("There was a tie in the number of completed processes.");
