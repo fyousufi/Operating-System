@@ -35,11 +35,11 @@ public class OS {
 		} else if (caseNumber == 2) { // Operate caseNumber 2
 			caseTwo execute = new caseTwo(processes, mainMemory);
 			execute.setVerbose(verbose);
-			execute.run();
+			execute.executeOS();
 		} else if (caseNumber == 3) { // Operate caseNumber 3
 			caseThree execute = new caseThree(processes, mainMemory);
 			execute.setVerbose(verbose);
-			execute.run();
+			execute.executeOS();
 		} else if (caseNumber == 4) { // Operate caseNumber 4
 			caseOne executeOne;
 			caseTwo executeTwo;
@@ -64,7 +64,7 @@ public class OS {
 			processes = new Queue(queueCopy);
 			executeTwo = new caseTwo(processes, mainMemory);
 			executeTwo.setVerbose(verbose);
-			executeTwo.run();
+			executeTwo.executeOS();
 
 			// Start process 3
 			System.out.println("=======================================================");
@@ -74,7 +74,7 @@ public class OS {
 			processes = new Queue(queueCopy);
 			executeThree = new caseThree(processes, mainMemory);
 			executeThree.setVerbose(verbose);
-			executeThree.run();
+			executeThree.executeOS();
 
 			// Compare the number of finished jobs for each case type
 			System.out.println("\n\n\n");
