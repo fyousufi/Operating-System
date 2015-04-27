@@ -17,11 +17,11 @@ public class Process {
 		status = "Waiting";
 	}
 
-	public Process(int id, int memRequest, int timeRequest, int memAssigned, int timeRemaining, String status) {
+	public Process(int id, int memoryRequest, int timeRequest, int memoryAssigned, int timeRemaining, String status) {
 		this.id = id;
-		this.memoryRequest = memRequest;
+		this.memoryRequest = memoryRequest;
 		this.timeRequest = timeRequest;
-		this.memoryAssigned = memAssigned;
+		this.memoryAssigned = memoryAssigned;
 		this.timeRemaining = timeRemaining;
 		this.status = status;
 	}

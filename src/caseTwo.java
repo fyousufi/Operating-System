@@ -13,7 +13,7 @@ public class caseTwo {
 		this.main = main;
 	}
 
-	/***Execute the HOS on Case Two***/
+	/***Execute the OS on Case Two***/
 	public void run() {
 		while (!caseTerminated) {
 			if (verbose) { System.out.println("I'm running!"); }
@@ -40,6 +40,7 @@ public class caseTwo {
 
 				//Increase the count until it equals the position in the job queue of an unassigned Job
 				Boolean testDone = false;
+				
 				while (!testDone) {
 					if (count < processes.getLength()) {
 						if (processes.getStatus(count) == "Waiting") {
@@ -120,7 +121,7 @@ public class caseTwo {
 
 		// Now that this case has executed, output the total number of jobs completed.
 		numberOfFinishedProcesses = processes.numberOfFinishedProcess();
-		System.out.println("Total number of finished jobs: " + numberOfFinishedProcesses);
+		System.out.println("Total number of finished processes: " + numberOfFinishedProcesses);
 	}
 
 	/***Tick Function***/
@@ -142,7 +143,7 @@ public class caseTwo {
 	}
 
 	public int numberOfFinishedProcesses() {
-		if(countoftimeSliceFull < 30) {
+		if (countoftimeSliceFull < 30) {
 			//The case hasn't been run yet... return a null value.
 			return -1;
 		}
