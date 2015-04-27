@@ -59,7 +59,7 @@ public class caseOne {
 
 				// Begin assigning jobs until the above conditions are no longer true.
 				if (!assigned) {
-					// This section should be skipepd if assigned is true.
+					// This section should be skipped if assigned is true.
 					if (count < processes.getLength()) {
 						// During this tick, there are still Jobs that haven't been checked that may need to be assigned.
 						Boolean success = false;
