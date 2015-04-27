@@ -58,9 +58,9 @@ public class caseTwo {
 
 				// Begin assigning jobs until the above conditions are no longer true.
 				if (!assigned){
-					// This section should be skipepd if assigned is true.
+					// This section should be skipped if assigned is true.
 					if (count < processes.getLength()) {
-						// During this tick, there are still Jobs that haven't been checked that may need to be assigned.
+						// During this unit, there are still Jobs that haven't been checked that may need to be assigned.
 						Boolean success = false;
 						
 						for (int i = main.firstAvailableMemorySlot(); i < main.size && success == false; i++) {
@@ -104,7 +104,7 @@ public class caseTwo {
 			}
 
 			// Increase the tick by 1.
-			tick();
+			timeUnit();
 
 			// Break the while loop if all jobs are done.
 			if (!processes.getUnfinishedProcess()) {
@@ -124,7 +124,7 @@ public class caseTwo {
 	}
 
 	/***Tick Function***/
-	public void tick() {
+	public void timeUnit() {
 		countoftimeSliceFull++;
 		main.timeSliceFull();
 		System.out.println("=========================================================================");
