@@ -1,3 +1,4 @@
+
 public class Queue {
 	/***Variables***/
 	public Process[] processQueue;
@@ -156,8 +157,9 @@ public class Queue {
 	}
 
 	/***toString***/
+	@Override
 	public String toString() {
-		String output = "=========================================================================\n";
+		String output = "-------------------------------------------------------------------------\n";
 
 		output += "ID\tSegment\tMem Request\tTime\tTime Remaining\tMessages\n";
 		output += "--\t-------\t-----------\t----\t--------------\t--------\n";
@@ -171,7 +173,7 @@ public class Queue {
 			output += processQueue[i].getStatus() + "\n";
 		}
 
-		output += "=========================================================================";
+		output += "-------------------------------------------------------------------------";
 
 		return output;
 	}

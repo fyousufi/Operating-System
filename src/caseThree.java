@@ -1,3 +1,8 @@
+/**
+ * 
+ * Case Three : Shortest Job First (First Fit)
+ *
+ */
 public class caseThree extends cases {
 	Queue SJFjobs; // Copy of jobs ordered from the shortest job first to the longest job last
 
@@ -9,9 +14,9 @@ public class caseThree extends cases {
 		SJFjobs = processes.shortestProcess();
 	}
 
-	/***Execute the OS on Case Type 3***/
+	/***Run the OS on Case Type 3***/
 	@Override
-	public void executeOS() {
+	public void run() {
 		while (!caseTerminated) {
 			if (verbose) { System.out.println("I'm running!"); }
 			// Assign Jobs to memory

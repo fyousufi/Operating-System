@@ -8,6 +8,10 @@ public class OS {
 	Queue processes;
 	MainMemory mainMemory;
 	ProcessGenerator processGenerator;
+	
+	static caseOne executeOne;
+	static caseTwo executeTwo;
+	static caseThree executeThree;
 
 	/***Constructor***/
 	public OS(int casetype, Boolean verbose) {
@@ -29,52 +33,48 @@ public class OS {
 	/***Start***/
 	public void start() {
 		if (caseNumber == 1) { // Operate caseNumber 1
-			caseOne execute = new caseOne(processes, mainMemory);
-			execute.setVerbose(verbose);
-			execute.executeOS();
+			executeOne = new caseOne(processes, mainMemory);
+			executeOne.setVerbose(verbose);
+			executeOne.run();
 		} else if (caseNumber == 2) { // Operate caseNumber 2
-			caseTwo execute = new caseTwo(processes, mainMemory);
-			execute.setVerbose(verbose);
-			execute.executeOS();
+			executeTwo = new caseTwo(processes, mainMemory);
+			executeTwo.setVerbose(verbose);
+			executeTwo.run();
 		} else if (caseNumber == 3) { // Operate caseNumber 3
-			caseThree execute = new caseThree(processes, mainMemory);
-			execute.setVerbose(verbose);
-			execute.executeOS();
+			executeThree = new caseThree(processes, mainMemory);
+			executeThree.setVerbose(verbose);
+			executeThree.run();
 		} else if (caseNumber == 4) { // Operate caseNumber 4
-			caseOne executeOne;
-			caseTwo executeTwo;
-			caseThree executeThree;
-
 			// Make a copy of the original array, so that all three executions share the same input data
 			Queue queueCopy = new Queue(processes);
 
 			// Start process 1
-			System.out.println("=======================================================");
-			System.out.println("==Case One=============================================");
-			System.out.println("=======================================================");
+			System.out.println("-------------------------------------------------------");
+			System.out.println("     Case One: First Come First Served (First Fit)     ");
+			System.out.println("-------------------------------------------------------");
 			executeOne = new caseOne(processes, mainMemory);
 			executeOne.setVerbose(verbose);
-			executeOne.executeOS();
+			executeOne.run();
 
 			// Start process 2
-			System.out.println("=======================================================");
-			System.out.println("==Case Two=============================================");
-			System.out.println("=======================================================");
+			System.out.println("-------------------------------------------------------");
+			System.out.println("     Case Two: First Come First Served (Best Fit)      ");
+			System.out.println("-------------------------------------------------------");
 			mainMemory = new MainMemory();
 			processes = new Queue(queueCopy);
 			executeTwo = new caseTwo(processes, mainMemory);
 			executeTwo.setVerbose(verbose);
-			executeTwo.executeOS();
+			executeTwo.run();
 
 			// Start process 3
-			System.out.println("=======================================================");
-			System.out.println("==Case Three===========================================");
-			System.out.println("=======================================================");
+			System.out.println("-------------------------------------------------------");
+			System.out.println("      Case Three: Shortest Job First (First Fit)       ");
+			System.out.println("-------------------------------------------------------");
 			mainMemory = new MainMemory();
 			processes = new Queue(queueCopy);
 			executeThree = new caseThree(processes, mainMemory);
 			executeThree.setVerbose(verbose);
-			executeThree.executeOS();
+			executeThree.run();
 
 			// Compare the number of finished jobs for each case type
 			System.out.println("\n\n\n");
@@ -102,14 +102,26 @@ public class OS {
 	public String toString() {
 		return "";
 	}
+	
+	public static int getWinner() {
+		if (executeOne.numberOfFinishedProcesses() > executeTwo.numberOfFinishedProcesses() && executeOne.numberOfFinishedProcesses() > executeThree.numberOfFinishedProcesses()) {
+			return 1;
+		} else if (executeTwo.numberOfFinishedProcesses() > executeOne.numberOfFinishedProcesses() && executeTwo.numberOfFinishedProcesses() > executeThree.numberOfFinishedProcesses()) {
+			return 2;
+		} else if (executeThree.numberOfFinishedProcesses() > executeOne.numberOfFinishedProcesses() && executeThree.numberOfFinishedProcesses() > executeTwo.numberOfFinishedProcesses()) {
+			return 3;
+		} else {
+			return 0;
+		}
+	}
 
 	/***Main***/
 	public static void main(String[] args) {
 		//arg1: Allowed values are 1, 2, 3, OR 4. This represents the three
-		//	    different cases the HOS can execute. For example, 1 is
+		//	    different cases the OS can execute. For example, 1 is
 		//	    case 1, 2 is case 2, 3 is case 3. If you use 4, it will
 		//	    perform all cases, with identical data.
-		//arg2: Allowed value is v. This toggles the HOS to print
+		//arg2: Allowed value is v. This toggles the OS to print
 		//      everything verbosely.
 		/***Variables***/
 		int caseNumber;

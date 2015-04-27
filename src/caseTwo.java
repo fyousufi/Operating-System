@@ -1,14 +1,19 @@
-
+/**
+ * 
+ * Case Two : First Come First Served (Best Fit)
+ *
+ */
 public class caseTwo extends cases {
+	
 	/***Constructor***/
 	public caseTwo(Queue processes, MainMemory mainMemory) {
 		this.processes = processes;
 		this.mainMemory = mainMemory;
 	}
 
-	/***Execute the OS on Case Two***/
+	/***Run the OS on Case Two***/
 	@Override
-	public void executeOS() {
+	public void run() {
 		while (!caseTerminated) {
 			if (verbose) { System.out.println("I'm running!"); }
 			// Assign Jobs to memory

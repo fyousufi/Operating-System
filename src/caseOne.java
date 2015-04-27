@@ -1,13 +1,19 @@
+/**
+ * 
+ * Case One : First Come First Served (First Fit)
+ *
+ */
 public class caseOne extends cases {
+	
 	/***Constructor***/
 	public caseOne(Queue processes, MainMemory mainMemory) {
 		this.processes = processes;
 		this.mainMemory = mainMemory;
 	}
 
-	/***Execute the OS on Case One***/
+	/***Run the OS on Case One***/
 	@Override
-	public void executeOS() {
+	public void run() {
 		while (!caseTerminated) {
 
 			// Assign Jobs to memory
