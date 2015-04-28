@@ -11,7 +11,7 @@ public class ProcessGenerator {
 			int memoryRequest = 0;
 			
 			while (memoryRequest < 100 || memoryRequest > 600) {
-				memoryRequest = (int) (Math.random()*100+50);
+				memoryRequest = (int) (Math.random()*500+100);
 			}
 			
 			processQueue.setMemoryRequest(i, memoryRequest);

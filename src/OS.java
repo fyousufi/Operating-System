@@ -45,12 +45,11 @@ public class OS {
 			executeThree = new caseThree(processes, mainMemory);
 			executeThree.setVerbose(verbose);
 			executeThree.run();
-		}else if(caseNumber == 4){
+		} else if(caseNumber == 4){
 			executeFour = new caseFour(processes, mainMemory);
 			executeFour.setVerbose(verbose);
 			executeFour.run();
-		}
-		else if (caseNumber == 5) { // Operate caseNumber 4
+		} else if (caseNumber == 5) { // Operate caseNumber 4
 			// Make a copy of the original array, so that all three executions share the same input data
 			Queue queueCopy = new Queue(processes);
 
@@ -88,9 +87,9 @@ public class OS {
 			System.out.println("-------------------------------------------------------");
 			mainMemory = new MainMemory();
 			processes = new Queue(queueCopy);
-			executeThree = new caseThree(processes, mainMemory);
-			executeThree.setVerbose(verbose);
-			executeThree.run();
+			executeFour = new caseFour(processes, mainMemory);
+			executeFour.setVerbose(verbose);
+			executeFour.run();
 
 			// Compare the number of finished jobs for each case type
 			System.out.println("\n\n\n");
@@ -105,11 +104,9 @@ public class OS {
 				System.out.println("Case Two completed the most processes.");
 			} else if (executeThree.numberOfFinishedProcesses() > executeOne.numberOfFinishedProcesses() && executeThree.numberOfFinishedProcesses() > executeTwo.numberOfFinishedProcesses() && executeThree.numberOfFinishedProcesses() > executeFour.numberOfFinishedProcesses() ) {
 				System.out.println("Case Three completed the most processes.");
-			} else if (executeFour.numberOfFinishedProcesses() > executeOne.numberOfFinishedProcesses() && executeFour.numberOfFinishedProcesses() > executeTwo.numberOfFinishedProcesses() && executeFour.numberOfFinishedProcesses() > executeThree.numberOfFinishedProcesses())
-			{
+			} else if (executeFour.numberOfFinishedProcesses() > executeOne.numberOfFinishedProcesses() && executeFour.numberOfFinishedProcesses() > executeTwo.numberOfFinishedProcesses() && executeFour.numberOfFinishedProcesses() > executeThree.numberOfFinishedProcesses()) {
 				System.out.println("Case Four completed the most processes.");
-			}
-			else {
+			} else {
 				System.out.println("There was a tie in the number of completed processes.");
 			}
 		} else { // Error
@@ -125,12 +122,14 @@ public class OS {
 	}
 	
 	public static int getWinner() {
-		if (executeOne.numberOfFinishedProcesses() > executeTwo.numberOfFinishedProcesses() && executeOne.numberOfFinishedProcesses() > executeThree.numberOfFinishedProcesses()) {
+		if (executeOne.numberOfFinishedProcesses() > executeTwo.numberOfFinishedProcesses() && executeOne.numberOfFinishedProcesses() > executeThree.numberOfFinishedProcesses() && executeOne.numberOfFinishedProcesses() > executeFour.numberOfFinishedProcesses()) {
 			return 1;
-		} else if (executeTwo.numberOfFinishedProcesses() > executeOne.numberOfFinishedProcesses() && executeTwo.numberOfFinishedProcesses() > executeThree.numberOfFinishedProcesses()) {
+		} else if (executeTwo.numberOfFinishedProcesses() > executeOne.numberOfFinishedProcesses() && executeTwo.numberOfFinishedProcesses() > executeThree.numberOfFinishedProcesses() && executeTwo.numberOfFinishedProcesses() > executeFour.numberOfFinishedProcesses()) {
 			return 2;
-		} else if (executeThree.numberOfFinishedProcesses() > executeOne.numberOfFinishedProcesses() && executeThree.numberOfFinishedProcesses() > executeTwo.numberOfFinishedProcesses()) {
+		} else if (executeThree.numberOfFinishedProcesses() > executeOne.numberOfFinishedProcesses() && executeThree.numberOfFinishedProcesses() > executeTwo.numberOfFinishedProcesses() && executeThree.numberOfFinishedProcesses() > executeFour.numberOfFinishedProcesses() ) {
 			return 3;
+		} else if (executeFour.numberOfFinishedProcesses() > executeOne.numberOfFinishedProcesses() && executeFour.numberOfFinishedProcesses() > executeTwo.numberOfFinishedProcesses() && executeFour.numberOfFinishedProcesses() > executeThree.numberOfFinishedProcesses()) {
+			return 4;
 		} else {
 			return 0;
 		}

@@ -1,18 +1,20 @@
 /**
  * 
- * Case One : Shortest Job First Served (First Fit)
+ * Case Four : Shortest Job First Served (First Fit)
  *
  */
 public class caseFour extends cases {
 	Queue SJFjobs;
+	
 	/***Constructor***/
 	public caseFour(Queue processes, MainMemory mainMemory) {
 		this.processes = processes;
 		this.mainMemory = mainMemory;
+		
 		SJFjobs = processes.shortestProcess();
 	}
 
-	/***Run the OS on Case One***/
+	/***Run the OS on Case Four***/
 	@Override
 	public void run() {
 		while (!caseTerminated) {
@@ -76,8 +78,6 @@ public class caseFour extends cases {
 								}
 							}
 						}
-
-
 					}
 				}
 
