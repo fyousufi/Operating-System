@@ -1,29 +1,27 @@
 /**
  * 
- * Case Three : Shortest Job First (First Fit)
+ * Case One : Shortest Job First Served (First Fit)
  *
  */
-public class caseThree extends cases {
-	Queue SJFjobs; // Copy of jobs ordered from the shortest job first to the longest job last as defined in constructor we have jobs sorted 
-
+public class caseFour extends cases {
+	Queue SJFjobs;
 	/***Constructor***/
-	public caseThree(Queue processes, MainMemory mainMemory) {
+	public caseFour(Queue processes, MainMemory mainMemory) {
 		this.processes = processes;
 		this.mainMemory = mainMemory;
-
 		SJFjobs = processes.shortestProcess();
 	}
 
-	/***Run the OS on Case Type 3***/
+	/***Run the OS on Case One***/
 	@Override
 	public void run() {
 		while (!caseTerminated) {
-			if (verbose) { System.out.println("I'm running!"); }
+
 			// Assign Jobs to memory
 			Boolean assigned = false;
 			int count = 0;
 			int jobToAssign = 0;
-			
+
 			while (!assigned) {
 				// If there are no available positions in the memory left
 				if (!mainMemory.memoryAvailable()) {
@@ -43,7 +41,7 @@ public class caseThree extends cases {
 
 				// Increase the count until it equals the position in the job queue of an unassigned Job
 				Boolean testDone = false;
-				
+
 				while (!testDone) {
 					if (count < processes.getLength()) {
 						if (SJFjobs.getStatus(count) == "Waiting") {
@@ -60,43 +58,26 @@ public class caseThree extends cases {
 					}
 				}
 
+
 				// Begin assigning jobs until the above conditions are no longer true.
-				if (!assigned){
-					// This section should be skipepd if assigned is true.
+				if (!assigned) {
+					// This section should be skipped if assigned is true.
 					if (count < processes.getLength()) {
 						// During this tick, there are still Jobs that haven't been checked that may need to be assigned.
 						Boolean success = false;
-						int minimum = Integer.MAX_VALUE;
-						int index = -1;
-						
+
 						for (int i = mainMemory.firstAvailableMemorySlot(); i < mainMemory.size && success == false; i++) {
 							if (!mainMemory.getInUse(i)) {
 								// This memory module is not in use.
 								if (processes.getMemoryRequest(jobToAssign) < mainMemory.getSize(i)) {
-									if (verbose) { System.out.println("A"); }
-									
-									
-									if (mainMemory.sizeArray[i] - processes.getMemoryRequest(jobToAssign) < minimum && mainMemory.sizeArray[i] - processes.getMemoryRequest(jobToAssign) >= 0) {
-										minimum = mainMemory.sizeArray[i] - processes.getMemoryRequest(jobToAssign);
-										index = i;
-									}
-
-
-									if (verbose) { System.out.println("B"); }
-									
-									
-								
-									if (verbose) { System.out.println("C"); }
 									// This job can fit in the memory block
-									if (index != -1) {
-										mainMemory.assignMemory(index, processes.getProcess(jobToAssign));
-										success = true;
-									}
-									
-								
+									mainMemory.assignMemory(i, processes.getProcess(jobToAssign));
+									success = true;
 								}
 							}
-						}	    
+						}
+
+
 					}
 				}
 
@@ -115,6 +96,7 @@ public class caseThree extends cases {
 			// Break the while loop if all jobs are done.
 			if (!processes.getUnfinishedProcess()) {
 				caseTerminated = true;
+
 			}
 
 			// Break the while loop if one more tick will be the max tick, per the instructions.
@@ -122,10 +104,10 @@ public class caseThree extends cases {
 			if (countoftimeSliceFull >= TIME_LIMIT) {
 				caseTerminated = true;
 			}
-		}
 
-		// Now that this case has executed, output the total number of jobs completed.
-		numberOfFinishedProcess = processes.numberOfFinishedProcess();
-		System.out.println("Total number of finished processes: " + numberOfFinishedProcess);
-	}
+			// Now that this case has executed, output the total number of jobs completed.
+			numberOfFinishedProcess = processes.numberOfFinishedProcess();
+			System.out.println("Total number of finished processes: " + numberOfFinishedProcess);
+		}
+	} 
 }

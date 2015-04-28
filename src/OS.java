@@ -12,6 +12,7 @@ public class OS {
 	static caseOne executeOne;
 	static caseTwo executeTwo;
 	static caseThree executeThree;
+	static caseFour executeFour; 
 
 	/***Constructor***/
 	public OS(int casetype, Boolean verbose) {
@@ -44,7 +45,12 @@ public class OS {
 			executeThree = new caseThree(processes, mainMemory);
 			executeThree.setVerbose(verbose);
 			executeThree.run();
-		} else if (caseNumber == 4) { // Operate caseNumber 4
+		}else if(caseNumber == 4){
+			executeFour = new caseFour(processes, mainMemory);
+			executeFour.setVerbose(verbose);
+			executeFour.run();
+		}
+		else if (caseNumber == 5) { // Operate caseNumber 4
 			// Make a copy of the original array, so that all three executions share the same input data
 			Queue queueCopy = new Queue(processes);
 
@@ -68,7 +74,17 @@ public class OS {
 
 			// Start process 3
 			System.out.println("-------------------------------------------------------");
-			System.out.println("      Case Three: Shortest Job First (First Fit)       ");
+			System.out.println("      Case Three: Shortest Job First (Best Fit)       ");
+			System.out.println("-------------------------------------------------------");
+			mainMemory = new MainMemory();
+			processes = new Queue(queueCopy);
+			executeThree = new caseThree(processes, mainMemory);
+			executeThree.setVerbose(verbose);
+			executeThree.run();
+			
+			// Start process 4
+			System.out.println("-------------------------------------------------------");
+			System.out.println("      Case Four: Shortest Job First (First Fit)       ");
 			System.out.println("-------------------------------------------------------");
 			mainMemory = new MainMemory();
 			processes = new Queue(queueCopy);
@@ -81,14 +97,19 @@ public class OS {
 			System.out.println("Case One Finished " + executeOne.numberOfFinishedProcesses() + " Processes.");
 			System.out.println("Case Two Finished " + executeTwo.numberOfFinishedProcesses() + " Processes.");
 			System.out.println("Case Three Finished " + executeThree.numberOfFinishedProcesses() + " Processes.");
+			System.out.println("Case Four Finished " + executeFour.numberOfFinishedProcesses() + " Processes.");
 			
-			if (executeOne.numberOfFinishedProcesses() > executeTwo.numberOfFinishedProcesses() && executeOne.numberOfFinishedProcesses() > executeThree.numberOfFinishedProcesses()) {
+			if (executeOne.numberOfFinishedProcesses() > executeTwo.numberOfFinishedProcesses() && executeOne.numberOfFinishedProcesses() > executeThree.numberOfFinishedProcesses() && executeOne.numberOfFinishedProcesses() > executeFour.numberOfFinishedProcesses()) {
 				System.out.println("Case One completed the most processes.");
-			} else if (executeTwo.numberOfFinishedProcesses() > executeOne.numberOfFinishedProcesses() && executeTwo.numberOfFinishedProcesses() > executeThree.numberOfFinishedProcesses()) {
+			} else if (executeTwo.numberOfFinishedProcesses() > executeOne.numberOfFinishedProcesses() && executeTwo.numberOfFinishedProcesses() > executeThree.numberOfFinishedProcesses() && executeTwo.numberOfFinishedProcesses() > executeFour.numberOfFinishedProcesses()) {
 				System.out.println("Case Two completed the most processes.");
-			} else if (executeThree.numberOfFinishedProcesses() > executeOne.numberOfFinishedProcesses() && executeThree.numberOfFinishedProcesses() > executeTwo.numberOfFinishedProcesses()) {
+			} else if (executeThree.numberOfFinishedProcesses() > executeOne.numberOfFinishedProcesses() && executeThree.numberOfFinishedProcesses() > executeTwo.numberOfFinishedProcesses() && executeThree.numberOfFinishedProcesses() > executeFour.numberOfFinishedProcesses() ) {
 				System.out.println("Case Three completed the most processes.");
-			} else {
+			} else if (executeFour.numberOfFinishedProcesses() > executeOne.numberOfFinishedProcesses() && executeFour.numberOfFinishedProcesses() > executeTwo.numberOfFinishedProcesses() && executeFour.numberOfFinishedProcesses() > executeThree.numberOfFinishedProcesses())
+			{
+				System.out.println("Case Four completed the most processes.");
+			}
+			else {
 				System.out.println("There was a tie in the number of completed processes.");
 			}
 		} else { // Error
@@ -117,9 +138,9 @@ public class OS {
 
 	/***Main***/
 	public static void main(String[] args) {
-		//arg1: Allowed values are 1, 2, 3, OR 4. This represents the three
+		//arg1: Allowed values are 1, 2, 3, OR 4 or 5. This represents the four
 		//	    different cases the OS can execute. For example, 1 is
-		//	    case 1, 2 is case 2, 3 is case 3. If you use 4, it will
+		//	    case 1, 2 is case 2, 3 is case 3. If you use 5, it will
 		//	    perform all cases, with identical data.
 		//arg2: Allowed value is v. This toggles the OS to print
 		//      everything verbosely.
@@ -156,7 +177,7 @@ public class OS {
 			verbose = false;
 
 			// Verify the caseNumber
-			if(caseNumber != 1 && caseNumber != 2 && caseNumber != 3 && caseNumber != 4) {
+			if(caseNumber != 1 && caseNumber != 2 && caseNumber != 3 && caseNumber != 4 && caseNumber !=5 ) {
 				caseNumber = 1;
 			}
 
