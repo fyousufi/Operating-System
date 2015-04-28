@@ -2,7 +2,7 @@
 public class MainMemory {
 	
 	/***Variables***/
-	MemoryModule[] Memory; // virtual memory
+	MemorySlot[] Memory; // virtual memory
 	int size = 7; // Change this value to change the number of MemoryModules
 	int[] sizeArray = {64, 96, 48, 32, 128, 96, 48}; // Add or remove entries from this array if you change the variable size.
 	int memory = 512; // 512MB Memory, in case this is needed
@@ -10,11 +10,11 @@ public class MainMemory {
 
 	/***Constructor***/
 	public MainMemory() {
-		Memory = new MemoryModule[size];
+		Memory = new MemorySlot[size];
 
 		// Initialize the memory modules
 		for(int i = 0; i < size; i++) {
-			Memory[i] = new MemoryModule();
+			Memory[i] = new MemorySlot();
 			Memory[i].setSegmentNumber(i);
 			Memory[i].setSize(sizeArray[i]);
 			Memory[i].setInUse(false);
@@ -78,7 +78,7 @@ public class MainMemory {
 	public void timeSliceFull() {
 		// Tick, as per the instructions, executes 2 jobs per time slice. Further, it
 		// does this in a round robin fashion. If you wish to change the number of
-		// processors the HOS has (and therefore how many jobs can be executed per
+		// processors the OS has (and therefore how many jobs can be executed per
 		// time slice), change the following variable (processors).
 		int processors = 2;
 		Boolean hasTicked = false;
@@ -87,7 +87,7 @@ public class MainMemory {
 
 		while (!hasTicked) {
 			if (lastProcessed == size) {
-				lastProcessed = 0; //Reset to 0 if the end of the array has been reached
+				lastProcessed = 0; // Reset to 0 if the end of the array has been reached
 			}
 
 			Boolean success = false;
@@ -146,7 +146,7 @@ public class MainMemory {
 		Memory[segmentNumber].setInUse(false);
 
 		// Reset the memory location
-		Memory[segmentNumber] = new MemoryModule();
+		Memory[segmentNumber] = new MemorySlot();
 		Memory[segmentNumber].setSize(sizeArray[segmentNumber]);
 
 		return true;

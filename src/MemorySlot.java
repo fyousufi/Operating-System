@@ -1,5 +1,5 @@
 
-public class MemoryModule {
+public class MemorySlot {
 	
 	/***Variables***/
 	int segmentNumber;
@@ -9,7 +9,7 @@ public class MemoryModule {
 	Process process;
 
 	/***Constructor***/
-	public MemoryModule() {
+	public MemorySlot() {
 		segmentNumber = -1;
 		size = -1;
 		inUse = false;
@@ -17,7 +17,7 @@ public class MemoryModule {
 		process = new Process();
 	}
 
-	public MemoryModule(int segmentNumber, int size, Boolean inUse, int wastedSpace, Process process) {
+	public MemorySlot(int segmentNumber, int size, Boolean inUse, int wastedSpace, Process process) {
 		this.segmentNumber = segmentNumber;
 		this.size = size;
 		this.inUse = inUse;

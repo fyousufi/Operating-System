@@ -3,7 +3,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class MemoryModuleTest {
-	private static MemoryModule memoryModule = new MemoryModule();
+	private static MemorySlot memoryModule = new MemorySlot();
 	private static final int N = 10;
 	private static final int MAX = 200;
 	private static final int MIN = 100;
