@@ -3,9 +3,9 @@ public class MainMemory {
 	
 	/***Variables***/
 	MemorySlot[] Memory; // virtual memory
-	int size = 7; // Change this value to change the number of MemoryModules
-	int[] sizeArray = {64, 96, 48, 32, 128, 96, 48}; // Add or remove entries from this array if you change the variable size.
-	int memory = 512; // 512MB Memory, in case this is needed
+	int size = 5; // Change this value to change the number of MemoryModules
+	int[] sizeArray = {100, 500, 200, 300, 600}; // Add or remove entries from this array if you change the variable size.
+	int memory = 1700; // 512MB Memory, in case this is needed
 	int lastProcessed; // This variable is used to keep track of the last Job to be used in order to process execution in a round robin fashion
 
 	/***Constructor***/
