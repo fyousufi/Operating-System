@@ -1,13 +1,14 @@
+
 public class Queue {
 	/***Variables***/
 	public Process[] processQueue;
-	private static final int NUMBER_OF_JOBS = 20;
+	private static final int NUMBER_OF_PROCESSES = 10;
 	
 	/***Constructor***/
 	public Queue() {
-		processQueue = new Process[NUMBER_OF_JOBS];
+		processQueue = new Process[NUMBER_OF_PROCESSES];
 		
-		for (int i = 0; i < NUMBER_OF_JOBS; i++) {
+		for (int i = 0; i < NUMBER_OF_PROCESSES; i++) {
 			processQueue[i] = new Process();
 		}
 	}
@@ -156,22 +157,23 @@ public class Queue {
 	}
 
 	/***toString***/
+	@Override
 	public String toString() {
-		String output = "=========================================================================\n";
+		String output = "-------------------------------------------------------------------------\n";
 
-		output += "Time\tID\tSegment\tMem Request\tTime Remain\tMessages\n";
-		output += "----\t--\t-------\t-----------\t-----------\t--------\n";
+		output += "ID\tSegment\tMem Request\tTime\tTime Remaining\tMessages\n";
+		output += "--\t-------\t-----------\t----\t--------------\t--------\n";
 
 		for (int i = 0; i < getLength(); i++) {
-			output += processQueue[i].getTimeRequest() + "\t";
 			output += processQueue[i].getID() + "\t";
-			output += processQueue[i].getMemoryAssigned() + "\t";
+			output += processQueue[i].getMemoryAssigned() + "\t   ";
 			output += processQueue[i].getMemoryRequest() + "\t\t";
+			output += processQueue[i].getTimeRequest() + "\t";
 			output += processQueue[i].getTimeRemaining() + "\t\t";
 			output += processQueue[i].getStatus() + "\n";
 		}
 
-		output += "=========================================================================";
+		output += "-------------------------------------------------------------------------";
 
 		return output;
 	}

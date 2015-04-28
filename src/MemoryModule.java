@@ -17,12 +17,12 @@ public class MemoryModule {
 		process = new Process();
 	}
 
-	public MemoryModule(int segmentNumber, int size, Boolean inUse, int wastedSpace, Process job) {
+	public MemoryModule(int segmentNumber, int size, Boolean inUse, int wastedSpace, Process process) {
 		this.segmentNumber = segmentNumber;
 		this.size = size;
 		this.inUse = inUse;
 		this.wastedSpace = wastedSpace;
-		this.process = job;
+		this.process = process;
 	}
 
 	/***Getters***/
@@ -63,7 +63,7 @@ public class MemoryModule {
 		this.wastedSpace = wastedSpace;
 	}
 
-	public void setJob(Process job) {
-		this.process = job;
+	public void setJob(Process process) {
+		this.process = process;
 	}
 }

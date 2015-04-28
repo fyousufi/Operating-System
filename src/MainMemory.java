@@ -10,7 +10,6 @@ public class MainMemory {
 
 	/***Constructor***/
 	public MainMemory() {
-		size = 7;
 		Memory = new MemoryModule[size];
 
 		// Initialize the memory modules

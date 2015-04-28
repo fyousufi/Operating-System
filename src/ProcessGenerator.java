@@ -6,7 +6,7 @@ public class ProcessGenerator {
 	public ProcessGenerator(Queue processQueue) {
 		this.processQueue = processQueue;
 
-		for (int i = 0; i < 20; i++) {
+		for (int i = 0; i < 10; i++) {
 			// Generate what memory request should be
 			int memoryRequest = 0;
 			
