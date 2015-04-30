@@ -18,7 +18,7 @@ public class caseThree extends cases {
 	@Override
 	public void run() {
 		while (!caseTerminated) {
-			if (verbose) { System.out.println("I'm running!"); }
+			if (detail) { System.out.println("I'm running!"); }
 			// Assign Jobs to memory
 			Boolean assigned = false;
 			int count = 0;
@@ -69,24 +69,24 @@ public class caseThree extends cases {
 						int minimum = Integer.MAX_VALUE;
 						int index = -1;
 						
-						for (int i = mainMemory.firstAvailableMemorySlot(); i < mainMemory.size && success == false; i++) {
+						for (int i = mainMemory.firstAvailableMemorySlot(); i < mainMemory.numberOfSlots && success == false; i++) {
 							if (!mainMemory.getInUse(i)) {
 								// This memory module is not in use.
 								if (processes.getMemoryRequest(jobToAssign) < mainMemory.getSize(i)) {
-									if (verbose) { System.out.println("A"); }
+									if (detail) { System.out.println("A"); }
 									
 									
-									if (mainMemory.sizeArray[i] - processes.getMemoryRequest(jobToAssign) < minimum && mainMemory.sizeArray[i] - processes.getMemoryRequest(jobToAssign) >= 0) {
-										minimum = mainMemory.sizeArray[i] - processes.getMemoryRequest(jobToAssign);
+									if (mainMemory.slotSize[i] - processes.getMemoryRequest(jobToAssign) < minimum && mainMemory.slotSize[i] - processes.getMemoryRequest(jobToAssign) >= 0) {
+										minimum = mainMemory.slotSize[i] - processes.getMemoryRequest(jobToAssign);
 										index = i;
 									}
 
 
-									if (verbose) { System.out.println("B"); }
+									if (detail) { System.out.println("B"); }
 									
 									
 								
-									if (verbose) { System.out.println("C"); }
+									if (detail) { System.out.println("C"); }
 									// This job can fit in the memory block
 									if (index != -1) {
 										mainMemory.assignMemory(index, processes.getProcess(jobToAssign));
@@ -105,7 +105,7 @@ public class caseThree extends cases {
 			}
 
 			// If verbose, print what this tick looks like
-			if (verbose) {
+			if (detail) {
 				System.out.println(mainMemory.toString());
 			}
 

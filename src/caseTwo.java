@@ -15,7 +15,7 @@ public class caseTwo extends cases {
 	@Override
 	public void run() {
 		while (!caseTerminated) {
-			if (verbose) { System.out.println("I'm running!"); }
+			if (detail) { System.out.println("I'm running!"); }
 			
 			//Assign Jobs to memory
 			Boolean assigned = false;
@@ -69,20 +69,20 @@ public class caseTwo extends cases {
 						int minimum = Integer.MAX_VALUE;
 						int index = -1;
 						
-						for (int i = mainMemory.firstAvailableMemorySlot(); i < mainMemory.size && success == false; i++) {
+						for (int i = mainMemory.firstAvailableMemorySlot(); i < mainMemory.numberOfSlots && success == false; i++) {
 							if (!mainMemory.getInUse(i)) {
 								// This memory module is not in use.
 								if (processes.getMemoryRequest(count) < mainMemory.getSize(i)) {
-									if (verbose) { System.out.println("A"); }
+									if (detail) { System.out.println("A"); }
 									
-									if (mainMemory.sizeArray[i] - processes.getMemoryRequest(count) < minimum && mainMemory.sizeArray[i] - processes.getMemoryRequest(count) >= 0) {
-										minimum = mainMemory.sizeArray[i] - processes.getMemoryRequest(count);
+									if (mainMemory.slotSize[i] - processes.getMemoryRequest(count) < minimum && mainMemory.slotSize[i] - processes.getMemoryRequest(count) >= 0) {
+										minimum = mainMemory.slotSize[i] - processes.getMemoryRequest(count);
 										index = i;
 									}
 
-									if (verbose) { System.out.println("B"); }
+									if (detail) { System.out.println("B"); }
 
-									if (verbose) { System.out.println("C"); }					
+									if (detail) { System.out.println("C"); }					
 								}
 							}
 						}
@@ -99,7 +99,7 @@ public class caseTwo extends cases {
 			}
 
 			// If verbose, print what this tick looks like
-			if (verbose) {
+			if (detail) {
 				System.out.println(mainMemory.toString());
 			}
 

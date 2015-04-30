@@ -1,218 +1,161 @@
-
+/**
+ * 
+ * Main Memory class which stores information about the Main Memory
+ *
+ */
 public class MainMemory {
-	
-	/***Variables***/
-	MemorySlot[] Memory; // virtual memory
-	int size = 5; // Change this value to change the number of MemoryModules
-	int[] sizeArray = {100, 500, 200, 300, 600}; // Add or remove entries from this array if you change the variable size.
-	int memory = 1700; // 512MB Memory, in case this is needed
-	int lastProcessed; // This variable is used to keep track of the last Job to be used in order to process execution in a round robin fashion
 
-	/***Constructor***/
+	/** Variables **/
+	MemorySlot[] Memory;
+	int numberOfSlots = 5; // Change this variable to change the number of slots for the Main Memory
+	int[] slotSize = {100, 500, 200, 300, 600}; // Set the size of each slot in the Main Memory
+	int lastProcessed;
+
+	/** Constructor **/
 	public MainMemory() {
-		Memory = new MemorySlot[size];
+		Memory = new MemorySlot[numberOfSlots];
 
-		// Initialize the memory modules
-		for(int i = 0; i < size; i++) {
+		for(int i = 0; i < numberOfSlots; i++) {
 			Memory[i] = new MemorySlot();
 			Memory[i].setSegmentNumber(i);
-			Memory[i].setSize(sizeArray[i]);
+			Memory[i].setSize(slotSize[i]);
 			Memory[i].setInUse(false);
 			Memory[i].setWastedSpace(0);
 		}
 	}
 
-	/***Functions***/
-	// Assign a memory position
+	/** Functions **/
+	/*
+	 * Returns true if the assignment of Process was successful
+	 */
 	public Boolean assignMemory(int segmentNumber, Process process) {
 		if (process.getMemoryRequest() < Memory[segmentNumber].getSize()) {
 			if (!Memory[segmentNumber].getInUse()) {
 				Memory[segmentNumber].setJob(process);
 				setInUse(segmentNumber, true);
 
-				// Change the relevant values in the job
 				setMemoryAssigned(segmentNumber, segmentNumber);
 				setStatus(segmentNumber, "Ready");
 				setTimeRemaining(segmentNumber, getTimeRequest(segmentNumber));
 
-				// Determine wasted space and set it
 				setWastedSpace(segmentNumber, getSize(segmentNumber) - getMemoryRequest(segmentNumber));
 
-				return true; // The assignment was successful.
+				return true;
 			}
 		}
 
-		return false; // The assignment was not successful.
+		return false;
 	}
 
-	// Memory available
+	/*
+	 * Returns true if there are any memory available
+	 */
 	public Boolean memoryAvailable() {
-		// returns whether or not there is an empty memory space
-		// true if there is, false if not
-		for (int i = 0; i < size; i++) {
+		for (int i = 0; i < numberOfSlots; i++) {
 			if (Memory[i].getInUse() == false) {
-				return true; // There is at least one available memory space
+				return true;
 			}
 		}
 
-		return false; // There is no available memory spaces
+		return false;
 	}
 
-	// First available memory slot
+	/*
+	 * Returns the first available memory slot index
+	 */
 	public int firstAvailableMemorySlot() {
-		// returns the value in memory, starting with 0, of the first
-		// block of empty memory.
 		if (memoryAvailable()) {
-			for (int i = 0; i < size; i++) {
+			for (int i = 0; i < numberOfSlots; i++) {
 				if (Memory[i].getInUse() == false) {
-					return i; //This is the first available memory slot
+					return i;
 				}
 			}
 		}
 
-		// There is no available memory
 		return -1;
 	}
 
-	// Tick all jobs in memory
+	/*
+	 * Remove a process from memory slot and reset the memory slot
+	 */
+	public Boolean removeMemory(int segmentNumber) {
+		Memory[segmentNumber].setInUse(false);
+		Memory[segmentNumber] = new MemorySlot();
+		Memory[segmentNumber].setSize(slotSize[segmentNumber]);
+
+		return true;
+	}
+
+	/*
+	 * Returns the total amount of wasted memory for both in use and not in use slots
+	 */
+	public int totalWastedMemory() {
+		int total = 0;
+
+		for (int i = 0; i < numberOfSlots; i++) {
+			if (Memory[i].getInUse()) {
+				total += getWastedSpace(i);
+			} else {
+				total += getSize(i);
+			}
+		}
+
+		return total;
+	}
+
+	/*
+	 * Checks all processes in memory in a round robin fashion
+	 */
 	public void timeSliceFull() {
-		// Tick, as per the instructions, executes 2 jobs per time slice. Further, it
-		// does this in a round robin fashion. If you wish to change the number of
-		// processors the OS has (and therefore how many jobs can be executed per
-		// time slice), change the following variable (processors).
-		int processors = 2;
-		Boolean hasTicked = false;
+		int processors = 2; // Specify the number of processors to execute at one time
+		Boolean hasChecked = false;
 		int initialProcessed = lastProcessed;
 		int numberProcessed = 0;
 
-		while (!hasTicked) {
-			if (lastProcessed == size) {
-				lastProcessed = 0; // Reset to 0 if the end of the array has been reached
+		while (!hasChecked) {
+			if (lastProcessed == numberOfSlots) {
+				lastProcessed = 0;
 			}
 
 			Boolean success = false;
+			
 			if (Memory[lastProcessed].getInUse()) {
-				// If the memory is in use currently
 				if (getStatus(lastProcessed) == "Ready") {
-					// If the Job is "Ready", set it to "Running"
+					// Set the "Ready" process to "Running"
 					setStatus(lastProcessed, "Running");
-					// This counts as an execution, so move on to the next.
 					success = true;
 				} else if (getStatus(lastProcessed) == "Running") {
-					// If the memory is "Running," tick it.
+					// Check the "Running" process
 					setTimeRemaining(lastProcessed, getTimeRemaining(lastProcessed) - 1);
 
-					// If TimeRemain is now < 0, then the job has finished execution
-					if(getTimeRemaining(lastProcessed) < 0) {
-						// Set the relevant values
-						setTimeRemaining(lastProcessed, 0); //Simply for appearances, to show 0 instead of -1.
+					// Process has finished execution
+					if (getTimeRemaining(lastProcessed) < 0) {
+						setTimeRemaining(lastProcessed, 0);
 						setStatus(lastProcessed, "Finished");
-
-						// Remove it from memory
 						removeMemory(lastProcessed);
 					}
 
-					// Successfully executed a job, so move on to the next.
 					success = true;
 				}
 			}
 
 			if (!success) {
-				// If, for any of the above reasons, a Job was not ticked during this round through the while loop
 				lastProcessed++;
 			} else if (success) {
-				// A job was successfully executed.
 				lastProcessed++;
 				numberProcessed++;
 			}
 
-			// Has a job been executed per processor?
-			if(numberProcessed >= processors) {
-				hasTicked = true;
-			}
-
-			// Has the round robin circled through all jobs, but only executed 0 or 1?
-			// Note: This occurrs if the Jobs in memory are, for some reason, ticked
-			// despite having no Jobs, OR if there is fewer Jobs currently in memory
-			// than exist number of processors to execute them all.
-			else if(lastProcessed == initialProcessed) {
-				hasTicked = true;
+			if (numberProcessed >= processors) {
+				hasChecked = true;
+			} else if (lastProcessed == initialProcessed) {
+				hasChecked = true;
 			}
 		}
 	}
 
-	// Remove a job from a memory position
-	public Boolean removeMemory(int segmentNumber) {
-		Memory[segmentNumber].setInUse(false);
-
-		// Reset the memory location
-		Memory[segmentNumber] = new MemorySlot();
-		Memory[segmentNumber].setSize(sizeArray[segmentNumber]);
-
-		return true;
-	}
-
-	// Return the total amount of wasted memory
-	public int totalWastedMemory() {
-		int total = 0;
-		
-		for (int i = 0; i < size; i++) {
-			if (Memory[i].getInUse()) {
-				total += getWastedSpace(i); // This memory module is in use
-			} else {
-				total += getSize(i); // This memory module is not in use
-			}
-		}
-		
-		return total;
-	}
-
-
-	/***Setters***/
-	// For Memory
-	public void setSegmentNumber(int segmentNumber, int changedSegmentNumber) {
-		Memory[segmentNumber].setSegmentNumber(changedSegmentNumber);
-	}
-
-	public void setSize(int segmentNumber, int size) {
-		Memory[segmentNumber].setSize(size);
-	}
-
-	public void setInUse(int segmentNumber, Boolean inUse) {
-		Memory[segmentNumber].setInUse(inUse);
-	}
-
-	public void setWastedSpace(int segmentNumber, int wastedSpace) {
-		Memory[segmentNumber].setWastedSpace(wastedSpace);
-	}
-
-	// For Job
-	public void setID(int segmentNumber, int id) {
-		(Memory[segmentNumber].getJob()).setID(id);
-	}
-
-	public void setMemoryRequest(int segmentNumber, int memoryRequest) {
-		(Memory[segmentNumber].getJob()).setMemoryRequest(memoryRequest);
-	}
-
-	public void setTimeRequest(int segmentNumber, int timeRequest) {
-		(Memory[segmentNumber].getJob()).setTimeRequest(timeRequest);
-	}
-
-	public void setMemoryAssigned(int segmentNumber, int memoryAssigned) {
-		(Memory[segmentNumber].getJob()).setMemoryAssigned(memoryAssigned);
-	}
-
-	public void setTimeRemaining(int segmentNumber, int timeRemaining) {
-		(Memory[segmentNumber].getJob()).setTimeRemaining(timeRemaining);
-	}
-
-	public void setStatus(int segmentNumber, String status) {
-		(Memory[segmentNumber].getJob()).setStatus(status);
-	}
-
-	/***Getters***/
-	// For memory
+	/** Getters **/
+	/* For Memory */
 	public int getSegmentNumber(int segmentNumber) {
 		return Memory[segmentNumber].getSegmentNumber();
 	}
@@ -229,7 +172,7 @@ public class MainMemory {
 		return Memory[segmentNumber].getWastedSpace();
 	}
 
-	// For Job
+	/* For Job */
 	public int getID(int segmentNumber) {
 		return (Memory[segmentNumber].getJob()).getID();
 	}
@@ -254,11 +197,54 @@ public class MainMemory {
 		return (Memory[segmentNumber].getJob()).getStatus();
 	}
 
+	/** Setters **/
+	/* For Memory */
+	public void setSegmentNumber(int segmentNumber, int changedSegmentNumber) {
+		Memory[segmentNumber].setSegmentNumber(changedSegmentNumber);
+	}
 
-	/***toString***/
+	public void setSize(int segmentNumber, int size) {
+		Memory[segmentNumber].setSize(size);
+	}
+
+	public void setInUse(int segmentNumber, Boolean inUse) {
+		Memory[segmentNumber].setInUse(inUse);
+	}
+
+	public void setWastedSpace(int segmentNumber, int wastedSpace) {
+		Memory[segmentNumber].setWastedSpace(wastedSpace);
+	}
+
+	/* For Job */
+	public void setID(int segmentNumber, int id) {
+		(Memory[segmentNumber].getJob()).setID(id);
+	}
+
+	public void setMemoryRequest(int segmentNumber, int memoryRequest) {
+		(Memory[segmentNumber].getJob()).setMemoryRequest(memoryRequest);
+	}
+
+	public void setTimeRequest(int segmentNumber, int timeRequest) {
+		(Memory[segmentNumber].getJob()).setTimeRequest(timeRequest);
+	}
+
+	public void setMemoryAssigned(int segmentNumber, int memoryAssigned) {
+		(Memory[segmentNumber].getJob()).setMemoryAssigned(memoryAssigned);
+	}
+
+	public void setTimeRemaining(int segmentNumber, int timeRemaining) {
+		(Memory[segmentNumber].getJob()).setTimeRemaining(timeRemaining);
+	}
+
+	public void setStatus(int segmentNumber, String status) {
+		(Memory[segmentNumber].getJob()).setStatus(status);
+	}
+
+	/** toString **/
+	@Override
 	public String toString() {
 		String output = "";
-		
+
 		for (int i = 0; i < Memory.length; i++) {
 			output += "Memory Position " + i;
 			output += "\n-----------------------------------\n";
@@ -270,7 +256,7 @@ public class MainMemory {
 			output += "-------------------------------------------\n";
 			output += (Memory[i].getJob()).toString() + "\n";
 			output += "-------------------------------------------\n";
-			
+
 			if (i != Memory.length - 1) {
 				output += "-------------------------------------------\n";
 			}

@@ -11,8 +11,8 @@ public class MainMemoryTest {
 	/** For Memory **/
 	@Test
 	public void testSegmentNumber() {
-		for (int i = 0; i < mainMemory.size; i++) {
-			int changedSegmentNumber = (int) Math.random() * mainMemory.size;
+		for (int i = 0; i < mainMemory.numberOfSlots; i++) {
+			int changedSegmentNumber = (int) Math.random() * mainMemory.numberOfSlots;
 			mainMemory.setSegmentNumber(i, changedSegmentNumber);
 			assertEquals(changedSegmentNumber, mainMemory.getSegmentNumber(i));
 		}
@@ -20,7 +20,7 @@ public class MainMemoryTest {
 
 	@Test
 	public void testSize() {
-		for (int i = 0; i < mainMemory.size; i++) {
+		for (int i = 0; i < mainMemory.numberOfSlots; i++) {
 			int size = (int) (Math.random() * MAX) - MIN;
 			mainMemory.setSize(i, size);
 			assertEquals(size, mainMemory.getSize(i));
@@ -29,7 +29,7 @@ public class MainMemoryTest {
 
 	@Test
 	public void testInUse() {
-		for (int i = 0; i < mainMemory.size; i++) {
+		for (int i = 0; i < mainMemory.numberOfSlots; i++) {
 			mainMemory.setInUse(i, null);
 			assertEquals(null, mainMemory.getInUse(i));
 			mainMemory.setInUse(i, true);
@@ -41,7 +41,7 @@ public class MainMemoryTest {
 
 	@Test
 	public void testWastedSpace() {
-		for (int i = 0; i < mainMemory.size; i++) {
+		for (int i = 0; i < mainMemory.numberOfSlots; i++) {
 			int wastedSpace = (int) (Math.random() * MAX) - MIN;
 			mainMemory.setWastedSpace(i, wastedSpace);
 			assertEquals(wastedSpace, mainMemory.getWastedSpace(i));
@@ -51,7 +51,7 @@ public class MainMemoryTest {
 	/** For Memory **/
 	@Test
 	public void testID() {
-		for (int i = 0; i < mainMemory.size; i++) {
+		for (int i = 0; i < mainMemory.numberOfSlots; i++) {
 			int id = (int) (Math.random() * MAX) - MIN;
 			mainMemory.setID(i, id);
 			assertEquals(id, mainMemory.getID(i));
@@ -60,7 +60,7 @@ public class MainMemoryTest {
 
 	@Test
 	public void testMemoryRequest() {
-		for (int i = 0; i < mainMemory.size; i++) {
+		for (int i = 0; i < mainMemory.numberOfSlots; i++) {
 			int memoryRequest = (int) (Math.random() * MAX) - MIN;
 			mainMemory.setMemoryRequest(i, memoryRequest);
 			assertEquals(memoryRequest, mainMemory.getMemoryRequest(i));
@@ -69,7 +69,7 @@ public class MainMemoryTest {
 
 	@Test
 	public void testTimeRequest() {
-		for (int i = 0; i < mainMemory.size; i++) {
+		for (int i = 0; i < mainMemory.numberOfSlots; i++) {
 			int timeRequest = (int) (Math.random() * MAX) - MIN;
 			mainMemory.setTimeRequest(i, timeRequest);
 			assertEquals(timeRequest, mainMemory.getTimeRequest(i));
@@ -78,7 +78,7 @@ public class MainMemoryTest {
 
 	@Test
 	public void testMemoryAssigned() {
-		for (int i = 0; i < mainMemory.size; i++) {
+		for (int i = 0; i < mainMemory.numberOfSlots; i++) {
 			int memoryAssigned = (int) (Math.random() * MAX) - MIN;
 			mainMemory.setMemoryAssigned(i, memoryAssigned);
 			assertEquals(memoryAssigned, mainMemory.getMemoryAssigned(i));
@@ -87,7 +87,7 @@ public class MainMemoryTest {
 
 	@Test
 	public void testTimeRemaining() {
-		for (int i = 0; i < mainMemory.size; i++) {
+		for (int i = 0; i < mainMemory.numberOfSlots; i++) {
 			int timeRemaining = (int) (Math.random() * MAX) - MIN;
 			mainMemory.setTimeRemaining(i, timeRemaining);
 			assertEquals(timeRemaining, mainMemory.getTimeRemaining(i));
@@ -96,7 +96,7 @@ public class MainMemoryTest {
 	
 	@Test
 	public void testStatus() {
-		for (int i = 0; i < mainMemory.size; i++) {
+		for (int i = 0; i < mainMemory.numberOfSlots; i++) {
 			String status = statusList[(int) Math.random() * statusList.length];
 			mainMemory.setStatus(i, status);
 			assertEquals(status, mainMemory.getStatus(i));
@@ -105,7 +105,7 @@ public class MainMemoryTest {
 	
 	@Test
 	public void testAssignMemory() {
-		for (int i = 0; i < mainMemory.size; i++) {
+		for (int i = 0; i < mainMemory.numberOfSlots; i++) {
 			int id = (int) (Math.random() * MAX) - MIN;
 			int memoryRequest = (int) (Math.random() * MAX) - MIN;
 			int timeRequest = (int) (Math.random() * MAX) - MIN;
@@ -124,7 +124,7 @@ public class MainMemoryTest {
 	public void testMemoryAvailable() {
 		Boolean memoryAvailable = false;
 
-		for (int i = 0; i < mainMemory.size; i++) {
+		for (int i = 0; i < mainMemory.numberOfSlots; i++) {
 			if (mainMemory.getInUse(i) == false) {
 				memoryAvailable = true;
 				break;
@@ -139,7 +139,7 @@ public class MainMemoryTest {
 		int index = -1;
 		
 		if (mainMemory.memoryAvailable()) {
-			for (int i = 0; i < mainMemory.size; i++) {
+			for (int i = 0; i < mainMemory.numberOfSlots; i++) {
 				if (mainMemory.getInUse(i) == false) {
 					index = i;
 					break;
@@ -154,7 +154,7 @@ public class MainMemoryTest {
 	public void testWastedMemory() {
 		int count = 0;
 		
-		for (int i = 0; i < mainMemory.size; i++) {
+		for (int i = 0; i < mainMemory.numberOfSlots; i++) {
 			if (mainMemory.getInUse(i)) {
 				count += mainMemory.getWastedSpace(i);
 			} else {

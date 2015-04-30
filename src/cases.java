@@ -9,7 +9,7 @@ public class cases {
 	int countoftimeSliceFull = 0;
 	Queue processes;
 	MainMemory mainMemory;
-	Boolean verbose = false;
+	Boolean detail = false;
 	int numberOfFinishedProcess = 0;
 	
 	public void run() {
@@ -30,8 +30,8 @@ public class cases {
 	}
 
 	/***Functions***/
-	public void setVerbose(Boolean verbose) {
-		this.verbose = verbose;
+	public void setDetail(Boolean detail) {
+		this.detail = detail;
 	}
 
 	public int numberOfFinishedProcesses() {

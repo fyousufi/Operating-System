@@ -1,3 +1,8 @@
+/**
+ * 
+ * Process class which stores the information relevant to a Process
+ *
+ */
 public class Process {
 	/***Variables***/
 	int id;
@@ -34,6 +39,31 @@ public class Process {
 		this.timeRemaining = process.getTimeRemaining();
 		this.status = process.getStatus();
 	}
+	
+	/***Getters***/
+	public int getID() {
+		return id;
+	}
+
+	public int getMemoryRequest() {
+		return memoryRequest;
+	}
+
+	public int getTimeRequest() {
+		return timeRequest;
+	}
+
+	public int getMemoryAssigned() {
+		return memoryAssigned;
+	}
+
+	public int getTimeRemaining() {
+		return timeRemaining;
+	}
+
+	public String getStatus() {
+		return status;
+	}
 
 	/***Setters***/
 	public void setID(int id) {
@@ -62,32 +92,8 @@ public class Process {
 		}
 	}
 
-	/***Getters***/
-	public int getID() {
-		return id;
-	}
-
-	public int getMemoryRequest() {
-		return memoryRequest;
-	}
-
-	public int getTimeRequest() {
-		return timeRequest;
-	}
-
-	public int getMemoryAssigned() {
-		return memoryAssigned;
-	}
-
-	public int getTimeRemaining() {
-		return timeRemaining;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
 	/***toString***/
+	@Override
 	public String toString() {
 		return id + " " + memoryRequest + " " + timeRequest + " " + memoryAssigned + " "
 				+ timeRemaining + " " + status;

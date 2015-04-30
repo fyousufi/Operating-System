@@ -1,9 +1,13 @@
-
+/**
+ * 
+ * Memory Slot class which stores information relevant to each Memory Slot
+ *
+ */
 public class MemorySlot {
 	
 	/***Variables***/
 	int segmentNumber;
-	int size; // in KB
+	int size;
 	Boolean inUse;
 	int wastedSpace;
 	Process process;

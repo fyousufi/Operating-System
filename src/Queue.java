@@ -1,10 +1,15 @@
-
+/**
+ * 
+ * Queue class to store processes
+ *
+ */
 public class Queue {
-	/***Variables***/
+	
+	/** Variables **/
 	public Process[] processQueue;
 	private static final int NUMBER_OF_PROCESSES = 10;
 	
-	/***Constructor***/
+	/** Constructor **/
 	public Queue() {
 		processQueue = new Process[NUMBER_OF_PROCESSES];
 		
@@ -22,7 +27,7 @@ public class Queue {
 		}
 	}
 
-	/***Getters***/
+	/** Getters **/
 	public int getID(int segment) {
 		return processQueue[segment].getID();
 	}
@@ -55,7 +60,7 @@ public class Queue {
 		return processQueue.length;
 	}
 
-	/***Setters***/
+	/** Setters **/
 	public void setID(int segment, int id){
 		processQueue[segment].setID(id);
 	}
@@ -84,9 +89,11 @@ public class Queue {
 		processQueue[segment] = process;
 	}
 
-	/***Functions***/
-	public Boolean getUnassignedProcess() {
-		// Return true if there are any jobs that need to be assigned - false otherwise.
+	/** Functions **/
+	/*
+	 * Returns true if there are any Unassigned processes
+	 */
+	public Boolean getUnassignedProcess() {		
 		for (int i = 0; i < getLength(); i++) {
 			if (getStatus(i) == "Waiting") {
 				return true;
@@ -96,8 +103,10 @@ public class Queue {
 		return false;
 	}
 
-	public Boolean getUnfinishedProcess() {
-		// Return true if there are any unfinished jobs.
+	/*
+	 * Returns true if there any Unfinished processes
+	 */
+	public Boolean getUnfinishedProcess() {		
 		for (int i = 0; i < getLength(); i++) {
 			if (getStatus(i) != "Finished") {
 				return true;
@@ -107,8 +116,10 @@ public class Queue {
 		return false;
 	}
 
+	/*
+	 * Returns the number of Waiting Processes
+	 */
 	public int numberOfWaitingProcess() {
-		// Return the number of jobs that are waiting.
 		int count = 0;
 		
 		for (int i = 0; i < getLength(); i++) {
@@ -119,9 +130,11 @@ public class Queue {
 		
 		return count;
 	}
-
+	
+	/*
+	 * Returns the number of Finished processes
+	 */
 	public int numberOfFinishedProcess() {
-		// Return the number of jobs that are finished
 		int count = 0;
 		
 		for (int i = 0; i < getLength(); i++) {
@@ -132,12 +145,13 @@ public class Queue {
 		
 		return count;
 	}
-
+	
+	/*
+	 * Returns the queue with shortest jobs first
+	 */
 	public Queue shortestProcess() {
-		// Return a copy of this queue object ordered from shortest job to longest job
 		Queue queueCopy = new Queue();
 
-		// Copy the current Queue into the copy Queue
 		for (int i = 0; i < getLength(); i++) {
 			queueCopy.setProcess(i, getProcess(i));
 		}
@@ -152,11 +166,10 @@ public class Queue {
 			}
 		}
 
-		// Return the copy of the Queue sorted into SJF order.
 		return queueCopy;
 	}
 
-	/***toString***/
+	/** toString **/
 	@Override
 	public String toString() {
 		String output = "-------------------------------------------------------------------------\n";

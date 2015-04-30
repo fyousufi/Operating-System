@@ -63,7 +63,7 @@ public class caseOne extends cases {
 						// During this tick, there are still Jobs that haven't been checked that may need to be assigned.
 						Boolean success = false;
 
-						for (int i = mainMemory.firstAvailableMemorySlot(); i < mainMemory.size && success == false; i++) {
+						for (int i = mainMemory.firstAvailableMemorySlot(); i < mainMemory.numberOfSlots && success == false; i++) {
 							if (!mainMemory.getInUse(i)) {
 								// This memory module is not in use.
 								if (processes.getMemoryRequest(count) < mainMemory.getSize(i)) {
@@ -83,7 +83,7 @@ public class caseOne extends cases {
 			}
 
 			// If verbose, print what this tick looks like
-			if (verbose) {
+			if (detail) {
 				System.out.println(mainMemory.toString());
 			}
 
