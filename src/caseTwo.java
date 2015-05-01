@@ -1,6 +1,7 @@
 /**
  * 
  * Case Two : First Come First Served (Best Fit)
+ * This algorithm loops through the process queue in order and assesses best fit using custom algoirthm 
  *
  */
 public class caseTwo extends cases {
@@ -27,7 +28,7 @@ public class caseTwo extends cases {
 					assigned = true;
 				}
 
-				//If there are no more Jobs that have not been completed or currently assigned
+				//If there are no more processes that have not been completed or currently assigned
 				if (!processes.getUnassignedProcess()) {
 					assigned = true;
 				}
@@ -38,7 +39,7 @@ public class caseTwo extends cases {
 					assigned = true;
 				}
 
-				//Increase the count until it equals the position in the job queue of an unassigned Job
+				//Increase the count until it equals the position in the processes queue of an unassigned Job
 				Boolean testDone = false;
 				
 				while (!testDone) {
@@ -59,11 +60,11 @@ public class caseTwo extends cases {
 				}
 
 
-				// Begin assigning jobs until the above conditions are no longer true.
+				// Begin assigning jobs until the above conditions are no longer true meaning assigned is set to true at that point.
 				if (!assigned){
-					// This section should be skipepd if assigned is true.
+					// This section is not true if the count exceeds length of processes
 					if (count < processes.getLength()) {
-						// During this tick, there are still Jobs that haven't been checked that may need to be assigned.
+						// During this unit, there are still processes that haven't been checked that may need to be assigned.
 						Boolean success = false;
 						
 						int minimum = Integer.MAX_VALUE;
@@ -94,25 +95,25 @@ public class caseTwo extends cases {
 					}
 				}
 
-				// Increase the count through the job queue.
+				// Increase the count through the processes queue.
 				count++;
 			}
 
-			// If verbose, print what this tick looks like
+			// If detail is ready to be written out, print what the state of main memory looks like
 			if (detail) {
 				System.out.println(mainMemory.toString());
 			}
 
-			//Increase the tick by 1.
+			//Increase the time counter/unit by 1 meaning we move on to the next unit.
 			timeUnit();
 
-			//Break the while loop if all jobs are done.
+			//Break the while loop if all jobs are done. We say this case has been terminated
 			if(!processes.getUnfinishedProcess()) {
 				caseTerminated = true;
 			}
 
-			//Break the while loop if one more tick will be the 30th (max) tick, per the instructions.
-			//Comment this out if you wish for the program to execute until ALL jobs reach a "Finished" state.
+			//Break the while loop if one more time unit will be the 20th (max) time unit but this can change, per the instructions.
+			//Comment this out if you wish for the program to execute until ALL processes reach a "Finished" state.
 			if (countoftimeSliceFull >= TIME_LIMIT) {
 				caseTerminated = true;
 			}

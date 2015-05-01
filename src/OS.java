@@ -2,6 +2,7 @@
  * 
  * Operating System (OS) class which creates the Main Memory, Queue, and Processes and executes each Queue based on the algorithms chosen
  *
+ *By Nik Yusof and Farjad Yousufi 
  */
 public class OS {
 	

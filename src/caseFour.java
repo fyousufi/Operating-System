@@ -6,7 +6,7 @@
 public class caseFour extends cases {
 	Queue SJFjobs;
 	
-	/***Constructor***/
+	/***Constructor- like the rest of the cases takes in processes and Main Memory***/
 	public caseFour(Queue processes, MainMemory mainMemory) {
 		this.processes = processes;
 		this.mainMemory = mainMemory;
@@ -19,29 +19,29 @@ public class caseFour extends cases {
 	public void run() {
 		while (!caseTerminated) {
 
-			// Assign Jobs to memory
+			// Assign processes to memory
 			Boolean assigned = false;
 			int count = 0;
 			int jobToAssign = 0;
 
 			while (!assigned) {
-				// If there are no available positions in the memory left
+				// If there are no slots memory left, then our scheduler essentially terminates
 				if (!mainMemory.memoryAvailable()) {
 					assigned = true;
 				}
 
-				// If there are no more Jobs that have not been completed or currently assigned
+				// If there are no more processes that have not been completed or currently assigned we terminate
 				if (!processes.getUnassignedProcess()) {
 					assigned = true;
 				}
 
-				// If every job has been checked, but for whatever reason (i.e. none of the jobs
-				// can fit in the currently available memory) a Job cannot be assigned.
+				// If every process has been checked, but for whatever reason (i.e. none of the processes
+				// can fit in the currently available memory) a process cannot be assigned.
 				if (count >= processes.getLength()) {
 					assigned = true;
 				}
 
-				// Increase the count until it equals the position in the job queue of an unassigned Job
+				// Increase the count until it equals the position in the process queue of an unassigned Job
 				Boolean testDone = false;
 
 				while (!testDone) {
