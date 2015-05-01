@@ -5,7 +5,7 @@
  */
 public class caseOne extends cases {
 	
-	/***Constructor***/
+	/***Constructor- takes in a queue of processes and the main memory to allocate processes***/
 	public caseOne(Queue processes, MainMemory mainMemory) {
 		this.processes = processes;
 		this.mainMemory = mainMemory;
@@ -16,23 +16,23 @@ public class caseOne extends cases {
 	public void run() {
 		while (!caseTerminated) {
 
-			// Assign Jobs to memory
+			// Assign Processes to memory until there isn't any more space to
 			Boolean assigned = false;
 			int count = 0;
 
 			while (!assigned) {
-				// If there are no available positions in the memory left
+				//If there are no available positions in the memory left
 				if (!mainMemory.memoryAvailable()) {
 					assigned = true;
 				}
 
-				// If there are no more Jobs that have not been completed or currently assigned
+				// If the processes are no longer unassigned to something then set the assigned to true 
 				if (!processes.getUnassignedProcess()) {
 					assigned = true;
 				}
 
-				// If every job has been checked, but for whatever reason (i.e. none of the jobs
-				// can fit in the currently available memory) a Job cannot be assigned.
+				//If every process has been checked, but for whatever reason (i.e. none of the jobs
+				//can fit in the currently available memory) then a process cannot be assigned.
 				if (count >= processes.getLength()) {
 					assigned = true;
 				}

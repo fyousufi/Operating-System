@@ -10,7 +10,7 @@ public class caseThree extends cases {
 	public caseThree(Queue processes, MainMemory mainMemory) {
 		this.processes = processes;
 		this.mainMemory = mainMemory;
-
+		//this is where we use sorting to QuickSort to sort the processes based on time request 
 		SJFjobs = processes.shortestProcess();
 	}
 
@@ -35,8 +35,7 @@ public class caseThree extends cases {
 					assigned = true;
 				}
 
-				// If every job has been checked, but for whatever reason (i.e. none of the jobs
-				// can fit in the currently available memory) a Job cannot be assigned.
+				// If our count exceeds the length of our processes we terminate the scheduler 
 				if (count >= processes.getLength()) {
 					assigned = true;
 				}
@@ -60,11 +59,11 @@ public class caseThree extends cases {
 					}
 				}
 
-				// Begin assigning jobs until the above conditions are no longer true.
+				// Begin assigning processes until the above conditions are no longer true.
 				if (!assigned){
-					// This section should be skipepd if assigned is true.
+					// This section should be skipped if assigned is true.
 					if (count < processes.getLength()) {
-						// During this tick, there are still Jobs that haven't been checked that may need to be assigned.
+						// During the time unit, there are still Jobs that haven't been checked that may need to be assigned.
 						Boolean success = false;
 						int minimum = Integer.MAX_VALUE;
 						int index = -1;
