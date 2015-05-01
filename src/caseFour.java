@@ -10,7 +10,7 @@ public class caseFour extends cases {
 	public caseFour(Queue processes, MainMemory mainMemory) {
 		this.processes = processes;
 		this.mainMemory = mainMemory;
-		
+		//this is where we use sorting to QuickSort to sort the processes based on time request field 
 		SJFjobs = processes.shortestProcess();
 	}
 
@@ -41,7 +41,7 @@ public class caseFour extends cases {
 					assigned = true;
 				}
 
-				// Increase the count until it equals the position in the process queue of an unassigned Job
+				//Increase the count until it equals the position in the processes queue of an unassigned Process within the queue
 				Boolean testDone = false;
 
 				while (!testDone) {
@@ -65,12 +65,12 @@ public class caseFour extends cases {
 				if (!assigned) {
 					// This section should be skipped if assigned is true.
 					if (count < processes.getLength()) {
-						// During this tick, there are still Jobs that haven't been checked that may need to be assigned.
+						// During this unit, there are still processes that haven't been checked that may need to be assigned.
 						Boolean success = false;
 
 						for (int i = mainMemory.firstAvailableMemorySlot(); i < mainMemory.numberOfSlots && success == false; i++) {
 							if (!mainMemory.getInUse(i)) {
-								// This memory module is not in use.
+								// This memory module is not in use so we can check if it is a first fit.
 								if (processes.getMemoryRequest(jobToAssign) < mainMemory.getSize(i)) {
 									// This job can fit in the memory block
 									mainMemory.assignMemory(i, processes.getProcess(jobToAssign));
@@ -81,16 +81,16 @@ public class caseFour extends cases {
 					}
 				}
 
-				// Increase the count through the job queue.
+				// Increase the count through the processes queue.
 				count++;
 			}
 
-			// If verbose, print what this tick looks like
+			// If detail is ready to be written out, print what the state of main memory looks like
 			if (detail) {
 				System.out.println(mainMemory.toString());
 			}
 
-			// Increase the tick by 1.
+			//Increase the time counter/unit by 1 meaning we move on to the next unit.
 			timeUnit();
 
 			// Break the while loop if all jobs are done.
@@ -99,13 +99,12 @@ public class caseFour extends cases {
 
 			}
 
-			// Break the while loop if one more tick will be the max tick, per the instructions.
-			// Comment this out if you wish for the program to execute until ALL jobs reach a "Finished" state.
+			//Break the while loop if all jobs are done. We say this case has been terminated
 			if (countoftimeSliceFull >= TIME_LIMIT) {
 				caseTerminated = true;
 			}
 
-			// Now that this case has executed, output the total number of jobs completed.
+			//Now that this case has executed, output the total number of processes completed.
 			numberOfFinishedProcess = processes.numberOfFinishedProcess();
 			System.out.println("Total number of finished processes: " + numberOfFinishedProcess);
 		}

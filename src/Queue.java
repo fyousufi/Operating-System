@@ -147,7 +147,7 @@ public class Queue {
 	}
 	
 	/*
-	 * Returns the queue with shortest jobs first
+	 * Returns the queue with shortest processes first
 	 */
 	public Queue shortestProcess() {
 		Queue queueCopy = new Queue();

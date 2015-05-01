@@ -37,7 +37,7 @@ public class caseOne extends cases {
 					assigned = true;
 				}
 
-				// Increase the count until it equals the position in the job queue of an unassigned Job
+				//Increase the count until it equals the position in the processes queue of an unassigned Process within the queue
 				Boolean testDone = false;
 
 				while (!testDone) {
@@ -56,11 +56,11 @@ public class caseOne extends cases {
 				}
 
 
-				// Begin assigning jobs until the above conditions are no longer true.
+				// Begin assigning processes until the above conditions are no longer true meaning assigned is set to "true" at that point.
 				if (!assigned) {
-					// This section should be skipped if assigned is true.
+					// This section is not true if the count exceeds length of processes
 					if (count < processes.getLength()) {
-						// During this tick, there are still Jobs that haven't been checked that may need to be assigned.
+						// During this unit, there are still processes that haven't been checked that may need to be assigned.
 						Boolean success = false;
 
 						for (int i = mainMemory.firstAvailableMemorySlot(); i < mainMemory.numberOfSlots && success == false; i++) {
@@ -82,12 +82,12 @@ public class caseOne extends cases {
 				count++;
 			}
 
-			// If verbose, print what this tick looks like
+			// If detail is ready to be written out, print what the state of main memory looks like
 			if (detail) {
 				System.out.println(mainMemory.toString());
 			}
 
-			// Increase the tick by 1.
+			//Increase the time counter/unit by 1 meaning we move on to the next unit.
 			timeUnit();
 
 			// Break the while loop if all jobs are done.
@@ -96,13 +96,12 @@ public class caseOne extends cases {
 
 			}
 
-			// Break the while loop if one more tick will be the max tick, per the instructions.
-			// Comment this out if you wish for the program to execute until ALL jobs reach a "Finished" state.
+			//Break the while loop if one more time unit will be the 20th (max) time unit but this can change, per the instructions.
 			if (countoftimeSliceFull >= TIME_LIMIT) {
 				caseTerminated = true;
 			}
 
-			// Now that this case has executed, output the total number of jobs completed.
+			//Now that this case has executed, output the total number of processes completed.
 			numberOfFinishedProcess = processes.numberOfFinishedProcess();
 			System.out.println("Total number of finished processes: " + numberOfFinishedProcess);
 		}

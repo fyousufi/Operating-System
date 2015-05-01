@@ -40,7 +40,7 @@ public class caseThree extends cases {
 					assigned = true;
 				}
 
-				// Increase the count until it equals the position in the job queue of an unassigned Job
+				//Increase the count until it equals the position in the processes queue of an unassigned Process within the queue
 				Boolean testDone = false;
 				
 				while (!testDone) {
@@ -59,7 +59,7 @@ public class caseThree extends cases {
 					}
 				}
 
-				// Begin assigning processes until the above conditions are no longer true.
+				// Begin assigning processes until the above conditions are no longer true meaning assigned is set to "true" at that point.
 				if (!assigned){
 					// This section should be skipped if assigned is true.
 					if (count < processes.getLength()) {
@@ -99,7 +99,7 @@ public class caseThree extends cases {
 					}
 				}
 
-				// Increase the count through the job queue.
+				// Increase the count through the processes queue.
 				count++;
 			}
 
@@ -108,7 +108,7 @@ public class caseThree extends cases {
 				System.out.println(mainMemory.toString());
 			}
 
-			// Increase the tick by 1.
+			//Increase the time counter/unit by 1 meaning we move on to the next unit.
 			timeUnit();
 
 			// Break the while loop if all jobs are done.
@@ -116,14 +116,13 @@ public class caseThree extends cases {
 				caseTerminated = true;
 			}
 
-			// Break the while loop if one more tick will be the max tick, per the instructions.
-			// Comment this out if you wish for the program to execute until ALL jobs reach a "Finished" state.
+			//Break the while loop if one more time unit will be the 20th (max) time unit but this can change, per the instructions.
 			if (countoftimeSliceFull >= TIME_LIMIT) {
 				caseTerminated = true;
 			}
 		}
 
-		// Now that this case has executed, output the total number of jobs completed.
+		//Now that this case has executed, output the total number of processes completed.
 		numberOfFinishedProcess = processes.numberOfFinishedProcess();
 		System.out.println("Total number of finished processes: " + numberOfFinishedProcess);
 	}

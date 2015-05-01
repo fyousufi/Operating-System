@@ -39,7 +39,7 @@ public class caseTwo extends cases {
 					assigned = true;
 				}
 
-				//Increase the count until it equals the position in the processes queue of an unassigned Job
+				//Increase the count until it equals the position in the processes queue of an unassigned Process within the queue
 				Boolean testDone = false;
 				
 				while (!testDone) {
@@ -60,7 +60,7 @@ public class caseTwo extends cases {
 				}
 
 
-				// Begin assigning jobs until the above conditions are no longer true meaning assigned is set to true at that point.
+				// Begin assigning processes until the above conditions are no longer true meaning assigned is set to "true" at that point.
 				if (!assigned){
 					// This section is not true if the count exceeds length of processes
 					if (count < processes.getLength()) {
@@ -113,13 +113,13 @@ public class caseTwo extends cases {
 			}
 
 			//Break the while loop if one more time unit will be the 20th (max) time unit but this can change, per the instructions.
-			//Comment this out if you wish for the program to execute until ALL processes reach a "Finished" state.
+	
 			if (countoftimeSliceFull >= TIME_LIMIT) {
 				caseTerminated = true;
 			}
 		}
 
-		//Now that this case has executed, output the total number of jobs completed.
+		//Now that this case has executed, output the total number of processes completed.
 		numberOfFinishedProcess = processes.numberOfFinishedProcess();
 		System.out.println("Total number of finished jobs: " + numberOfFinishedProcess);
 	}
